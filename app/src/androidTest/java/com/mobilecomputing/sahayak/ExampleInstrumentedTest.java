@@ -1,4 +1,4 @@
-package com.example.sahayak;
+package com.mobilecomputing.sahayak;
 
 import android.content.Context;
 
