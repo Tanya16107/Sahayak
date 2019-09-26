@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Sahayak</string>
+    <string name="app_description">A mentor-mentee based learning application</string>
+    <string name="continue_key">Continue</string>
+    <string name="onboarding1_heading">Register</string>
+    <string name="onboarding1_description">Create your profile and mention the skill you want to learn/teach</string>
+    <string name="onboarding2_heading">Get matched</string>
+    <string name="onboarding2_description">You\'ll be paired up with an appropriate mentor or mentee</string>
+    <string name="onboarding3_heading">Teach and Learn!</string>
+    <string name="onboarding3_description">Get hired by your dream corporates</string>
 </resources>
