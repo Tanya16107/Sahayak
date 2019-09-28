@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/signin_background"
+    android:gravity="bottom|center"
+    tools:context=".Activities.SignInActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/ralewayregular"
+            android:layout_marginBottom="16dp"
+            android:text="@string/signin_heading"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editText_mobileNo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="14"
+            android:fontFamily="@font/ralewayregular"
+            android:inputType="phone"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:hint="@string/signin_prompt"
+            android:textColor="@color/lightGrey"
+            android:textSize="14dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textCursorDrawable="@null"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/ralewayregular"
+            android:textSize="14dp"
+            android:textColor="@color/lightGrey"
+            android:layout_marginBottom="8dp"
+            android:text="@string/or"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView_googleIn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/ralewaylight"
+            android:textSize="14dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginBottom="24dp"
+            android:text="@string/signin_google_account"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/textView_signUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/ralewayregular"
+            android:textSize="14dp"
+            android:textColor="@color/lightGrey"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="96dp"
+            android:text="@string/signin_signup"
+            android:textAlignment="center" />
+    </LinearLayout>
+</LinearLayout>
