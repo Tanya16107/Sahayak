@@ -1,6 +1,8 @@
 package com.mobilecomputing.sahayak.JavaClasses;
 
-public class Proposal
+import java.io.Serializable;
+
+public class Proposal implements Serializable
 {
     int ID;
     private String mentorName;

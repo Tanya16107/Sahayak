@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -15,7 +16,7 @@ import com.mobilecomputing.sahayak.R;
 
 import java.util.List;
 
-public class MenteeOptionsActivity extends AppCompatActivity implements ProposalAdapter.ItemClickListener {
+public class MenteeOptionsActivity extends AppCompatActivity {
 
     ProposalAdapter mAdapter;
 
@@ -30,12 +31,16 @@ public class MenteeOptionsActivity extends AppCompatActivity implements Proposal
         ProposalLab proposalLab = ProposalLab.get(getApplicationContext());
         List<Proposal> proposals = proposalLab.getProposals();
 
-        mAdapter = new ProposalAdapter(this,proposals);
+        mAdapter = new ProposalAdapter(this, proposals);
+        mAdapter.setClickListener(new ProposalAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Proposal p=mAdapter.getItem(position);
+                Intent intent=new Intent(MenteeOptionsActivity.this,ProposalInformationActivity.class);
+                intent.putExtra("PROPOSAL_INFO",p);
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + mAdapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     }
 }

@@ -62,7 +62,7 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
 
         public void bind(Proposal proposal) {
             mProposal = proposal;
-            //mProposal_ID.setText(mProposal.getID());
+            mProposal_ID.setText(""+mProposal.getID());
             mProposal_Skill.setText(mProposal.getSkill());
         }
 
@@ -77,7 +77,7 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
         return mProposals.get(id);
     }
 
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 

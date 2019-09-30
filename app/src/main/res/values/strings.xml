@@ -13,4 +13,7 @@
     <string name="or">Or</string>
     <string name="signin_google_account">Sign In using Google</string>
     <string name="signin_signup">Not registered yet? Sign Up</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
