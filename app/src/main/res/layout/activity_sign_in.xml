@@ -50,16 +50,21 @@ android:background="@drawable/signin_background"
             android:text="@string/or"
             android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/textView_googleIn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/ralewaylight"
-            android:textSize="14dp"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginBottom="24dp"
-            android:text="@string/signin_google_account"
-            android:textAlignment="center" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView_googleIn"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:fontFamily="@font/ralewaylight"-->
+            <!--android:textSize="14dp"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:layout_marginBottom="24dp"-->
+            <!--android:text="@string/signin_google_account"-->
+            <!--android:textAlignment="center" />-->
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/textView_signUp"
