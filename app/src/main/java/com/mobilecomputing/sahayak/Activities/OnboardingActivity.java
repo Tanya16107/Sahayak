@@ -22,7 +22,8 @@ public class OnboardingActivity extends AppCompatActivity {
         mcontinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(OnboardingActivity.this, SignInActivity.class);
+                Intent intent = new Intent(OnboardingActivity.this, MenteeOptionsActivity.class);
+                //Intent intent = new Intent(OnboardingActivity.this, SignInActivity.class);
                 startActivity(intent);
             }
         });

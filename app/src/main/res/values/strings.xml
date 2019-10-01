@@ -15,4 +15,6 @@
     <string name="signin_signup">Not registered yet? Sign Up</string>
     <string name="txt_learn_something">Learn Something</string>
     <string name="txt_teach_something">Teach Something</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
