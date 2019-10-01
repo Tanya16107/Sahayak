@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
     tools:context=".Activities.UserDashboard">
 
     <Button
@@ -11,6 +13,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_learn_something"
+        android:drawableTop="@drawable/user_graduate_icon"
+        android:layout_margin="20dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="5dp"
+        android:textSize="16dp"
+        android:textColor="@color/lightGrey"
+        android:drawablePadding="5dp"
         />
 
     <Button
@@ -18,6 +27,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_teach_something"
+        android:drawableTop="@drawable/onboarding3"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_margin="20dp"
+        android:padding="5dp"
+        android:textSize="16dp"
+        android:textColor="@color/lightGrey"
+        android:drawablePadding="5dp"
         />
 
 </LinearLayout>

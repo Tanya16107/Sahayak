@@ -19,5 +19,13 @@ public class UserDashboard extends AppCompatActivity {
         Button btn_learn_something = (Button) findViewById(R.id.learn_something);
         Button btn_teach_something = (Button) findViewById(R.id.teach_something);
 
+
+        btn_learn_something.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent student_dashboard_intent = new Intent(UserDashboard.this, MenteeOptionsActivity.class);
+                startActivity(student_dashboard_intent);
+            }
+        });
     }
 }
