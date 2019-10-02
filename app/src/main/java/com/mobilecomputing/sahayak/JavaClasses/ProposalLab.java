@@ -4,6 +4,8 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 
 public class ProposalLab {
@@ -22,9 +24,18 @@ public class ProposalLab {
     private ProposalLab(Context context)
     {
         mProposals=new ArrayList<>();
-        for (int i=0; i<100; i++)
+        Random rand=new Random();
+
+        for (int i=0; i<20; i++)
         {
-            Proposal p=new Proposal(i,"SKILL #"+i);
+            Proposal p=new Proposal(i,"Skill "+UUID.randomUUID().toString().split("-")[0]);
+            p.setMentorRating(rand.nextInt(6));
+            p.setDescription(UUID.randomUUID().toString().replace("-"," ")+" "+UUID.randomUUID().toString().replace("-"," ")+" "+
+                    UUID.randomUUID().toString().replace("-"," "));
+
+            int hour=rand.nextInt(22);
+            int min=rand.nextInt(2);
+            p.setTimeWindow(hour,min,hour+1,min);
             mProposals.add(p);
         }
     }
