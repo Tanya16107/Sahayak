@@ -27,5 +27,12 @@ public class UserDashboard extends AppCompatActivity {
                 startActivity(student_dashboard_intent);
             }
         });
+        btn_teach_something.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent student_dashboard_intent = new Intent(UserDashboard.this, MentorOptionsActivity.class);
+                startActivity(student_dashboard_intent);
+            }
+        });
     }
 }

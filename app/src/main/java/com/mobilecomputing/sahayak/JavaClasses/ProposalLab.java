@@ -28,6 +28,9 @@ public class ProposalLab {
             mProposals.add(p);
         }
     }
+    public void AddProposal(Proposal proposal){
+        mProposals.add(proposal);
+    }
 
     public List<Proposal> getProposals()
     {
