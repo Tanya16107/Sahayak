@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProposalLab {
     private static ProposalLab sproposalLab;
-    private List<Proposal> mProposals;
+    private List<Proposal> mProposals = new ArrayList<>();;
     private DatabaseReference mDatabase;
 
     public static ProposalLab get(Context context)
@@ -36,11 +36,11 @@ public class ProposalLab {
 
     private ProposalLab(Context context)
     {
-        mProposals = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference("active_proposals");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mProposals.clear();
                 if (dataSnapshot.exists()){
                     for (DataSnapshot ds: dataSnapshot.getChildren()){
                         Proposal p = ds.getValue(Proposal.class);
@@ -57,7 +57,7 @@ public class ProposalLab {
     }
 
     public void AddProposal(Proposal proposal){
-        mProposals.add(proposal);
+//        mProposals.add(proposal);
         mDatabase = FirebaseDatabase.getInstance().getReference("active_proposals");
         // TODO: Handle Duplicates
         mDatabase.push().setValue(proposal);
@@ -66,9 +66,6 @@ public class ProposalLab {
     public List<Proposal> getProposals()
     {
         Log.d("ProposalLab", "Getting "+ mProposals.size() +" Proposals "+mProposals.getClass().getSimpleName());
-        for (Object p: mProposals) {
-            Log.d("ProposalLab", "Proposal for skill " + p.getClass().getSimpleName());
-        }
         return mProposals;
     }
 

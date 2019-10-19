@@ -35,7 +35,7 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
 
     @Override
     public void onBindViewHolder(ProposalHolder holder, int position) {
-        Log.d("ProposalAdapter", "Type of mProposalElement " + mProposals.get(position).getClass().getSimpleName());
+        Log.d("ProposalAdapter", "Type of mProposalElement " + mProposals.get(position).getSkill());
         Proposal proposal = mProposals.get(position);
         holder.bind(proposal);
     }

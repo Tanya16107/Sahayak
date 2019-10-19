@@ -55,6 +55,10 @@ public class Proposal implements Serializable {
         return ID;
     }
 
+    public void setID(int id) {
+        this.ID = id;
+    }
+
     public String getSkill() {
         return skill;
     }
