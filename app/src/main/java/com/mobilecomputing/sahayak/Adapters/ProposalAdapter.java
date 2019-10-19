@@ -49,21 +49,24 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
 
         private Proposal mProposal;
 
-        private TextView mProposal_ID;
+        private TextView mProposal_Rating;
         private TextView mProposal_Skill;
+        private  TextView mProposal_TimeWindow;
 
         ProposalHolder(View itemview) {
             super(itemview);
             itemView.setOnClickListener(this);
 
-            mProposal_ID = (TextView) itemView.findViewById(R.id.proposal_id);
+            mProposal_Rating = (TextView) itemView.findViewById(R.id.proposal_rating);
             mProposal_Skill = (TextView) itemView.findViewById(R.id.proposal_skill);
+            mProposal_TimeWindow = (TextView) itemview.findViewById(R.id.proposal_time_window);
         }
 
         public void bind(Proposal proposal) {
             mProposal = proposal;
-            mProposal_ID.setText(""+mProposal.getID());
+            mProposal_Rating.setText("Instructor Rating: "+mProposal.getRating());
             mProposal_Skill.setText(mProposal.getSkill());
+            mProposal_TimeWindow.setText("Time Window: "+mProposal.getTimeWindow());
         }
 
         @Override
