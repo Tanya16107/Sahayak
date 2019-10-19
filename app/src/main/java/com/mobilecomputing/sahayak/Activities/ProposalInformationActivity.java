@@ -18,15 +18,15 @@ public class ProposalInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proposal_information);
 
-        FragmentManager fm=getSupportFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
 
         Proposal mProposal = (Proposal) getIntent().getSerializableExtra("PROPOSAL_INFO");
-        Log.d("MYCODE",mProposal.getSkill()+"uno");
+        Log.d("MYCODE", mProposal.getSkill() + "uno");
         Bundle bundle = new Bundle();
-        bundle.putSerializable("PROPOSAL_INFO",mProposal);
+        bundle.putSerializable("PROPOSAL_INFO", mProposal);
 
-        Fragment fragObj=new proposalShowFragment();
+        Fragment fragObj = new proposalShowFragment();
         fragObj.setArguments(bundle);
-        fm.beginTransaction().replace(R.id.fragment,fragObj).commit();
+        fm.beginTransaction().replace(R.id.fragment, fragObj).commit();
     }
 }

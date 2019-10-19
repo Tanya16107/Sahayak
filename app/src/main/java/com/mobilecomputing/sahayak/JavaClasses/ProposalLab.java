@@ -7,10 +7,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class ProposalLab {
     private static ProposalLab sproposalLab;
     private List<Proposal> mProposals;
+    private DatabaseReference mDatabase;
 
     public static ProposalLab get(Context context)
     {
@@ -23,8 +27,11 @@ public class ProposalLab {
 
     private ProposalLab(Context context)
     {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         mProposals=new ArrayList<>();
         Random rand=new Random();
+
+
 
         for (int i=0; i<20; i++)
         {

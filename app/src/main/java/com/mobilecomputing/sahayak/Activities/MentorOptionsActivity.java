@@ -32,8 +32,8 @@ public class MentorOptionsActivity extends AppCompatActivity {
         categories.add("Health");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         Button addButton = (Button) findViewById(R.id.addButton);
-        final TextView skillsMentor = (TextView)  findViewById(R.id.skillsMentor);
-        final TextView timeCapMentor = (TextView)  findViewById(R.id.timeCapMentor);
+        final TextView skillsMentor = (TextView) findViewById(R.id.skillsMentor);
+        final TextView timeCapMentor = (TextView) findViewById(R.id.timeCapMentor);
         spinner.setAdapter(dataAdapter);
         final ProposalLab proposalLab = ProposalLab.get(getApplicationContext());
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +42,7 @@ public class MentorOptionsActivity extends AppCompatActivity {
                 String sSkillsMentor = skillsMentor.getText().toString();
                 String sCategoryMentor = spinner.getSelectedItem().toString();
                 Integer ntimeCapMentor = Integer.parseInt(timeCapMentor.getText().toString());
-                Proposal proposal = new Proposal(999999,sSkillsMentor);
+                Proposal proposal = new Proposal(999999, sSkillsMentor);
                 proposalLab.AddProposal(proposal);
                 skillsMentor.setText("");
                 timeCapMentor.setText("");

@@ -21,15 +21,14 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
-    public ProposalAdapter(Context context, List<Proposal> proposals)
-    {
-        this.mInflater=LayoutInflater.from(context);
+    public ProposalAdapter(Context context, List<Proposal> proposals) {
+        this.mInflater = LayoutInflater.from(context);
         this.mProposals = proposals;
     }
 
     @Override
     public ProposalHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.proposal_layout,parent,false);
+        View view = mInflater.inflate(R.layout.proposal_layout, parent, false);
         return new ProposalHolder(view);
     }
 
@@ -44,6 +43,18 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
         return mProposals.size();
     }
 
+    public Proposal getItem(int id) {
+        return mProposals.get(id);
+    }
+
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
     public class ProposalHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
@@ -51,7 +62,7 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
 
         private TextView mProposal_Rating;
         private TextView mProposal_Skill;
-        private  TextView mProposal_TimeWindow;
+        private TextView mProposal_TimeWindow;
 
         ProposalHolder(View itemview) {
             super(itemview);
@@ -64,27 +75,14 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
 
         public void bind(Proposal proposal) {
             mProposal = proposal;
-            mProposal_Rating.setText("Instructor Rating: "+mProposal.getRating());
+            mProposal_Rating.setText("Instructor Rating: " + mProposal.getRating());
             mProposal_Skill.setText(mProposal.getSkill());
-            mProposal_TimeWindow.setText("Time Window: "+mProposal.getTimeWindow());
+            mProposal_TimeWindow.setText("Time Window: " + mProposal.getTimeWindow());
         }
 
         @Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
-    }
-
-    public Proposal getItem(int id)
-    {
-        return mProposals.get(id);
-    }
-
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
     }
 }

@@ -35,9 +35,9 @@ public class MenteeOptionsActivity extends AppCompatActivity {
         mAdapter.setClickListener(new ProposalAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Proposal p=mAdapter.getItem(position);
-                Intent intent=new Intent(MenteeOptionsActivity.this,ProposalInformationActivity.class);
-                intent.putExtra("PROPOSAL_INFO",p);
+                Proposal p = mAdapter.getItem(position);
+                Intent intent = new Intent(MenteeOptionsActivity.this, ProposalInformationActivity.class);
+                intent.putExtra("PROPOSAL_INFO", p);
                 startActivity(intent);
             }
         });
