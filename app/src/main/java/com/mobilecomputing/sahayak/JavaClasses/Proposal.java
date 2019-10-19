@@ -1,7 +1,10 @@
 package com.mobilecomputing.sahayak.JavaClasses;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.io.Serializable;
 
+@IgnoreExtraProperties
 public class Proposal implements Serializable {
     public int startHour;
     public int startMin;
@@ -15,9 +18,37 @@ public class Proposal implements Serializable {
     private String description;
     private int durationCap;
 
+    public Proposal(){
+        // required empty constructor
+    }
+
     public Proposal(int i, String s) {
         ID = i;
         skill = s;
+    }
+
+    public String getMentorName() {
+        return mentorName;
+    }
+
+    public void setMentorName(String mentorName) {
+        this.mentorName = mentorName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getDurationCap() {
+        return durationCap;
+    }
+
+    public void setDurationCap(int durationCap) {
+        this.durationCap = durationCap;
     }
 
     public int getID() {

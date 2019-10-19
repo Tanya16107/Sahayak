@@ -1,6 +1,7 @@
 package com.mobilecomputing.sahayak.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
 
     @Override
     public void onBindViewHolder(ProposalHolder holder, int position) {
+        Log.d("ProposalAdapter", "Type of mProposalElement " + mProposals.get(position).getClass().getSimpleName());
         Proposal proposal = mProposals.get(position);
         holder.bind(proposal);
     }

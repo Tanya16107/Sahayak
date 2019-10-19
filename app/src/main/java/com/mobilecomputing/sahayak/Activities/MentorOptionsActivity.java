@@ -42,7 +42,9 @@ public class MentorOptionsActivity extends AppCompatActivity {
                 String sSkillsMentor = skillsMentor.getText().toString();
                 String sCategoryMentor = spinner.getSelectedItem().toString();
                 Integer ntimeCapMentor = Integer.parseInt(timeCapMentor.getText().toString());
-                Proposal proposal = new Proposal(999999, sSkillsMentor);
+                Proposal proposal = new Proposal(1, sSkillsMentor);
+                proposal.setCategory(sCategoryMentor);
+                proposal.setDurationCap(ntimeCapMentor);
                 proposalLab.AddProposal(proposal);
                 skillsMentor.setText("");
                 timeCapMentor.setText("");
