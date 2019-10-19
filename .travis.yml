@@ -10,6 +10,7 @@ android:
 
 before_script: 
     - chmod +x gradlew
+    - openssl aes-256-cbc -K $encrypted_2844885ced97_key -iv $encrypted_2844885ced97_iv -in app/ci_secret.txt -out app/google-services.json -d
 
 script:
     - ./gradlew build
