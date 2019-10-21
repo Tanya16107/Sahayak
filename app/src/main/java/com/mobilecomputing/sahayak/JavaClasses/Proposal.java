@@ -16,9 +16,10 @@ public class Proposal implements Serializable {
     private String category;
     private String skill;
     private String description;
+    private String cloudID;
     private int durationCap;
 
-    public Proposal(){
+    public Proposal() {
         // required empty constructor
     }
 
@@ -77,6 +78,14 @@ public class Proposal implements Serializable {
 
     public void setDescription(String d) {
         description = d;
+    }
+
+    public String getCloudID() {
+        return cloudID;
+    }
+
+    public void setCloudID(String cloudID) {
+        this.cloudID = cloudID;
     }
 
     public void setTimeWindow(int sh, int sm, int eh, int em) {
