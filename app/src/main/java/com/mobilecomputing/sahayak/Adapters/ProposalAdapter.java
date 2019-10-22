@@ -9,12 +9,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mobilecomputing.sahayak.JavaClasses.ProposalLab;
 import com.mobilecomputing.sahayak.JavaClasses.Proposal;
+import com.mobilecomputing.sahayak.R;
 
 import java.util.List;
-
-import com.mobilecomputing.sahayak.R;
 
 public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.ProposalHolder> {
 

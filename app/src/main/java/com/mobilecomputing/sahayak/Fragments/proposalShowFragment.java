@@ -1,19 +1,21 @@
 package com.mobilecomputing.sahayak.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mobilecomputing.sahayak.JavaClasses.Proposal;
+import com.mobilecomputing.sahayak.JavaClasses.Session;
+import com.mobilecomputing.sahayak.JavaClasses.SessionLab;
 import com.mobilecomputing.sahayak.R;
 
 public class proposalShowFragment extends Fragment {
@@ -37,7 +39,7 @@ public class proposalShowFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_proposal_show, container, false);
-        Proposal mProposal = (Proposal) getArguments().getSerializable("PROPOSAL_INFO");
+        final Proposal mProposal = (Proposal) getArguments().getSerializable("PROPOSAL_INFO");
 
         TextView mProposal_skill = (TextView) v.findViewById(R.id.proposal_skill);
         mProposal_skill.setText(mProposal.getSkill());
@@ -104,6 +106,18 @@ public class proposalShowFragment extends Fragment {
             xyz += (sh + 1) + "" + tmp[sm];
             rb2.setText(xyz);
         }
+
+        Button b = (Button) v.findViewById(R.id.submitButton);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SessionLab sl = SessionLab.get(view.getContext());
+                Session newSession = new Session(sl.getSessions().size(), mProposal);
+                sl.AddSession(newSession);
+                proposalShowFragment.this.getActivity().finish();
+                Toast.makeText(view.getContext(), "Your session was requested successfully!", Toast.LENGTH_SHORT);
+            }
+        });
 
         return v;
     }

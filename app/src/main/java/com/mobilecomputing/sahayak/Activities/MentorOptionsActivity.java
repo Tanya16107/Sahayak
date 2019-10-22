@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Debug;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.mobilecomputing.sahayak.JavaClasses.Proposal;
 import com.mobilecomputing.sahayak.JavaClasses.ProposalLab;
 import com.mobilecomputing.sahayak.R;
@@ -111,8 +114,8 @@ public class MentorOptionsActivity extends AppCompatActivity implements Calendar
                     String sCategoryMentor = spinner.getSelectedItem().toString();
                     Integer endtime = Integer.parseInt(spinnerMinutes.getSelectedItem().toString());
                     Integer timeCap = Integer.parseInt(spinnerMinutes2.getSelectedItem().toString());
-                    Integer endtimeHour = hourOfDay + endtime/60;
-                    Integer endtimeMinute = hourOfDay + endtime%60;
+                    Integer endtimeHour = hourOfDay + endtime/60+ (minute + endtime)/60;
+                    Integer endtimeMinute = (minute + endtime)%60;
                     Proposal proposal = new Proposal(proposalLab.getProposals().size(), sSkillsMentor);
                     proposal.setCategory(sCategoryMentor);
                     proposal.setDurationCap(timeCap);

@@ -16,9 +16,10 @@ public class Proposal implements Serializable {
     private String category;
     private String skill;
     private String description;
+    private String cloudID;
     private int durationCap;
 
-    public Proposal(){
+    public Proposal() {
         // required empty constructor
     }
 
@@ -79,6 +80,14 @@ public class Proposal implements Serializable {
         description = d;
     }
 
+    public String getCloudID() {
+        return cloudID;
+    }
+
+    public void setCloudID(String cloudID) {
+        this.cloudID = cloudID;
+    }
+
     public void setTimeWindow(int sh, int sm, int eh, int em) {
         startHour = sh;
         startMin = sm;
@@ -94,8 +103,9 @@ public class Proposal implements Serializable {
             startMin=0;
         }
         else {
-            startMin=30;
+            startMin=1;
         }
+
         if (startHour < 10) {
             S += "0" + startHour + "" + tmp[startMin];
         } else {
@@ -104,9 +114,9 @@ public class Proposal implements Serializable {
 
         S += "-";
         if (endHour < 10) {
-            S += "0" + endHour + "" + tmp[endMin];
+            S += "0" + endHour + "" + endMin;
         } else {
-            S += endHour + "" + tmp[endMin];
+            S += endHour + "" + endMin;
         }
         return S;
     }
