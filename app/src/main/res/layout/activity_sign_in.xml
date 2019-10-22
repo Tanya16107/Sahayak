@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@drawable/signin_background"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/signin_background"
     android:gravity="bottom|center"
     tools:context=".Activities.SignInActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="64dp"
             android:fontFamily="@font/ralewayregular"
             android:layout_marginBottom="16dp"
             android:text="@string/signin_heading"
@@ -28,6 +31,9 @@ android:background="@drawable/signin_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ems="14"
+            android:layout_marginLeft="48dp"
+            android:layout_marginRight="48dp"
+            android:backgroundTint="@color/lightGrey"
             android:fontFamily="@font/ralewayregular"
             android:inputType="phone"
             android:layout_marginTop="16dp"
@@ -63,6 +69,8 @@ android:background="@drawable/signin_background"
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
+            android:layout_gravity="center"
+            app:buttonSize="wide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -70,12 +78,13 @@ android:background="@drawable/signin_background"
             android:id="@+id/textView_signUp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="invisible"
             android:fontFamily="@font/ralewayregular"
             android:textSize="14dp"
-            android:textColor="@color/lightGrey"
-            android:layout_marginTop="64dp"
             android:layout_marginBottom="96dp"
+            android:textColor="@color/lightGrey"
             android:text="@string/signin_signup"
             android:textAlignment="center" />
     </LinearLayout>
+
 </LinearLayout>
