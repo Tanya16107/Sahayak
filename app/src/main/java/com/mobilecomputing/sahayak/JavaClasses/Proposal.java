@@ -90,6 +90,12 @@ public class Proposal implements Serializable {
 
         String S = "";
         String tmp[] = {"00", "30"};
+        if(startMin<30){
+            startMin=0;
+        }
+        else {
+            startMin=30;
+        }
         if (startHour < 10) {
             S += "0" + startHour + "" + tmp[startMin];
         } else {

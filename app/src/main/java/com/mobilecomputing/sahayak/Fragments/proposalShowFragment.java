@@ -50,6 +50,12 @@ public class proposalShowFragment extends Fragment {
 
         int sh = mProposal.startHour;
         int sm = mProposal.startMin;
+        if(sm<30){
+            sm=0;
+        }
+        else{
+            sm=1;
+        }
 
         String tmp[] = {"00", "30"};
         RadioButton rb1 = (RadioButton) v.findViewById(R.id.radioButton);
