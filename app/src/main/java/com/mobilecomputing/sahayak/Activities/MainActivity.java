@@ -7,12 +7,15 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mobilecomputing.sahayak.R;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private static int TIME_OUT = 3000;
+    private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +29,15 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(MainActivity.this, OnboardingActivity.class);
+                mUser = FirebaseAuth.getInstance().getCurrentUser();
+
+                Intent i;
+                if(mUser != null){
+                    i = new Intent(MainActivity.this, UserDashboard.class);
+                }
+                else{
+                    i = new Intent(MainActivity.this, OnboardingActivity.class);
+                }
                 startActivity(i);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
