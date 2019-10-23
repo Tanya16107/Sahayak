@@ -44,6 +44,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -70,8 +71,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             // TODO: Possibly pass this user via this intent
                             Intent userDashboardIntent = new Intent(SignInActivity.this, UserDashboard.class);
                             startActivity(userDashboardIntent);
+                            setResult(RESULT_OK);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
+                            setResult(RESULT_CANCELED);
                             Log.d(TAG, "signInWithCredential:failure", task.getException());
                         }
                     }

@@ -2,6 +2,7 @@ package com.mobilecomputing.sahayak.JavaClasses;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 
@@ -21,8 +22,9 @@ public class ProposalLab {
     private static ProposalLab sproposalLab;
     private List<Proposal> mProposals = new ArrayList<>();
     private DatabaseReference mDatabase;
+    private ProgressBar progressBar;
 
-    private ProposalLab(Context context) {
+    private ProposalLab(final Context context) {
         mDatabase = FirebaseDatabase.getInstance().getReference("active_proposals");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
