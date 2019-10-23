@@ -71,8 +71,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             // TODO: Possibly pass this user via this intent
                             Intent userDashboardIntent = new Intent(SignInActivity.this, UserDashboard.class);
                             startActivity(userDashboardIntent);
+                            setResult(RESULT_OK);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
+                            setResult(RESULT_CANCELED);
                             Log.d(TAG, "signInWithCredential:failure", task.getException());
                         }
                     }
