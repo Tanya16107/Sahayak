@@ -1,12 +1,13 @@
 package com.mobilecomputing.sahayak.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -24,10 +25,10 @@ import com.mobilecomputing.sahayak.R;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final int RC_SIGN_IN = 7;
+    public static final String TAG = "SIGNINBAANI";
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
-    public static final int RC_SIGN_IN=7;
-    public static final String TAG = "SIGNINBAANI";
 
     @Override
     public void onClick(View v) {
@@ -91,6 +92,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.d(TAG, "Google sign in failed", e);
+                Toast.makeText(this, "Sign-In Failed! Please try again after sometime.", Toast.LENGTH_LONG).show();
             }
         }
     }
