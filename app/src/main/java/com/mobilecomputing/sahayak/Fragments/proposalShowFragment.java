@@ -114,8 +114,8 @@ public class proposalShowFragment extends Fragment {
                 SessionLab sl = SessionLab.get(view.getContext());
                 Session newSession = new Session(sl.getSessions().size(), mProposal);
                 sl.AddSession(newSession);
+                Toast.makeText(view.getContext(), "Session for " + newSession.getSkill() + " requested successfully!", Toast.LENGTH_SHORT).show();
                 proposalShowFragment.this.getActivity().finish();
-                Toast.makeText(view.getContext(), "Your session was requested successfully!", Toast.LENGTH_SHORT);
             }
         });
 
