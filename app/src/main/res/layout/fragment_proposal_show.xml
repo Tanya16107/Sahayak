@@ -44,13 +44,13 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:padding="15dp">
-        <RadioButton
+        <CheckBox
             android:id="@+id/radioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="RadioButton" />
 
-        <RadioButton
+        <CheckBox
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:enabled="false"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_background"
         android:layout_margin="15dp"

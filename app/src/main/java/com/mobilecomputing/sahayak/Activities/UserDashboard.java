@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
+import com.mobilecomputing.sahayak.JavaClasses.ProposalLab;
 import com.mobilecomputing.sahayak.R;
 
 public class UserDashboard extends AppCompatActivity {
@@ -16,9 +18,9 @@ public class UserDashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dashboard);
 
-        Button btn_learn_something = (Button) findViewById(R.id.learn_something);
-        Button btn_teach_something = (Button) findViewById(R.id.teach_something);
-
+        CardView btn_learn_something = (CardView) findViewById(R.id.learn_something);
+        CardView btn_teach_something = (CardView) findViewById(R.id.teach_something);
+        ProposalLab.get(this);
 
         btn_learn_something.setOnClickListener(new View.OnClickListener() {
             @Override

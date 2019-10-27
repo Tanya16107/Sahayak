@@ -5,35 +5,163 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:orientation="vertical"
     android:gravity="center"
     tools:context=".Activities.UserDashboard">
 
-    <Button
-        android:id="@+id/learn_something"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txt_learn_something"
-        android:drawableTop="@drawable/user_graduate_icon"
-        android:layout_margin="20dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:padding="5dp"
-        android:textSize="16dp"
-        android:textColor="@color/lightGrey"
-        android:drawablePadding="5dp"
-        />
+<!--    <Button-->
+<!--        android:id="@+id/learn_something"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/txt_learn_something"-->
+<!--        android:drawableTop="@drawable/user_graduate_icon"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:background="?android:attr/selectableItemBackground"-->
+<!--        android:padding="5dp"-->
+<!--        android:textSize="16dp"-->
+<!--        android:textColor="@color/lightGrey"-->
+<!--        android:drawablePadding="5dp"-->
+<!--        />-->
 
-    <Button
-        android:id="@+id/teach_something"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/txt_teach_something"
-        android:drawableTop="@drawable/onboarding3"
-        android:background="?android:attr/selectableItemBackground"
-        android:layout_margin="20dp"
-        android:padding="5dp"
-        android:textSize="16dp"
-        android:textColor="@color/lightGrey"
-        android:drawablePadding="5dp"
-        />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="32dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:text="Welcome," />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/colorPrimary"
+            android:text="You can now get started!" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/learn_something"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="0.5"
+            android:layout_marginBottom="4dp"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            card_view:cardElevation="2dp"
+            card_view:cardCornerRadius="1dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:background="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/user_graduate_icon" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:textAlignment="center"
+                    android:text="Learn Something"
+                    android:fontFamily="sans-serif"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/teach_something"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="0.5"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            card_view:cardElevation="2dp"
+            card_view:cardCornerRadius="1dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:background="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/onboarding3" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:textAlignment="center"
+                    android:text="Teach Something"
+                    android:fontFamily="sans-serif"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
+
+
+<!--    <Button-->
+<!--        android:id="@+id/teach_something"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/txt_teach_something"-->
+<!--        android:drawableTop="@drawable/onboarding3"-->
+<!--        android:background="?android:attr/selectableItemBackground"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:padding="5dp"-->
+<!--        android:textSize="16dp"-->
+<!--        android:textColor="@color/lightGrey"-->
+<!--        android:drawablePadding="5dp"-->
+<!--        />-->
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +49,8 @@ public class proposalShowFragment extends Fragment {
         mProposal_rating.setText("Instructor Rating: " + mProposal.getRating());
 
         TextView mProposal_description = (TextView) v.findViewById(R.id.proposal_description);
-        mProposal_description.setText("Description: " + mProposal.getDescription());
+        mProposal_description.setText("Category: " + mProposal.getCategory());
+        //mProposal_description.setText("Description: " + mProposal.getDescription());
 
         int sh = mProposal.startHour;
         int sm = mProposal.startMin;
@@ -60,7 +62,7 @@ public class proposalShowFragment extends Fragment {
         }
 
         String tmp[] = {"00", "30"};
-        RadioButton rb1 = (RadioButton) v.findViewById(R.id.radioButton);
+        final CheckBox rb1 = (CheckBox) v.findViewById(R.id.radioButton);
         String xyz = "";
 
         // TODO: Use proper variable names so that purpose of code is clear
@@ -84,7 +86,7 @@ public class proposalShowFragment extends Fragment {
             rb1.setText(xyz);
         }
 
-        RadioButton rb2 = (RadioButton) v.findViewById(R.id.radioButton2);
+        final CheckBox rb2 = (CheckBox) v.findViewById(R.id.radioButton2);
         if (sm == 1) {
             xyz = "";
             if (sh + 1 < 10) {
@@ -107,15 +109,43 @@ public class proposalShowFragment extends Fragment {
             rb2.setText(xyz);
         }
 
-        Button b = (Button) v.findViewById(R.id.submitButton);
+        final Button b = (Button) v.findViewById(R.id.submitButton);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SessionLab sl = SessionLab.get(view.getContext());
                 Session newSession = new Session(sl.getSessions().size(), mProposal);
                 sl.AddSession(newSession);
+                Toast.makeText(view.getContext(), "Session for " + newSession.getSkill() + " requested successfully!", Toast.LENGTH_SHORT).show();
                 proposalShowFragment.this.getActivity().finish();
-                Toast.makeText(view.getContext(), "Your session was requested successfully!", Toast.LENGTH_SHORT);
+            }
+        });
+
+        rb1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(rb1.isChecked() || rb2.isChecked())
+                {
+                    b.setEnabled(true);
+                }
+                else
+                {
+                    b.setEnabled(false);
+                }
+            }
+        });
+
+        rb2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(rb1.isChecked() || rb2.isChecked())
+                {
+                    b.setEnabled(true);
+                }
+                else
+                {
+                    b.setEnabled(false);
+                }
             }
         });
 
