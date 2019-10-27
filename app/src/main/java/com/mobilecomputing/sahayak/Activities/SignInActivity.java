@@ -1,12 +1,13 @@
 package com.mobilecomputing.sahayak.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -24,10 +25,10 @@ import com.mobilecomputing.sahayak.R;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final int RC_SIGN_IN = 7;
+    public static final String TAG = "SIGNINBAANI";
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
-    public static final int RC_SIGN_IN=7;
-    public static final String TAG = "SIGNINBAANI";
 
     @Override
     public void onClick(View v) {
@@ -43,6 +44,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -69,8 +71,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             // TODO: Possibly pass this user via this intent
                             Intent userDashboardIntent = new Intent(SignInActivity.this, UserDashboard.class);
                             startActivity(userDashboardIntent);
+                            setResult(RESULT_OK);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
+                            setResult(RESULT_CANCELED);
                             Log.d(TAG, "signInWithCredential:failure", task.getException());
                         }
                     }
@@ -91,6 +96,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.d(TAG, "Google sign in failed", e);
+                Toast.makeText(this, "Sign-In Failed! Please try again after sometime.", Toast.LENGTH_LONG).show();
             }
         }
     }

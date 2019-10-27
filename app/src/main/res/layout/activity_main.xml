@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/launcher_background"
+    android:background="@color/colorPrimaryDark"
     android:gravity="center"
     tools:context=".Activities.MainActivity">
 
@@ -19,7 +19,7 @@
             android:fontFamily="@font/playfairdisplaybold"
             android:text="@string/app_name"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/white"
             android:textSize="48dp"
             android:textStyle="bold" />
 
@@ -30,7 +30,7 @@
             android:fontFamily="@font/ralewaylight"
             android:text="@string/app_description"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/white"
             android:textSize="14dp" />
 
     </LinearLayout>

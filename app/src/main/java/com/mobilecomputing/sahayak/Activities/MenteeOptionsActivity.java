@@ -1,13 +1,12 @@
 package com.mobilecomputing.sahayak.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobilecomputing.sahayak.Adapters.ProposalAdapter;
 import com.mobilecomputing.sahayak.JavaClasses.Proposal;
@@ -35,9 +34,9 @@ public class MenteeOptionsActivity extends AppCompatActivity {
         mAdapter.setClickListener(new ProposalAdapter.ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Proposal p=mAdapter.getItem(position);
-                Intent intent=new Intent(MenteeOptionsActivity.this,ProposalInformationActivity.class);
-                intent.putExtra("PROPOSAL_INFO",p);
+                Proposal p = mAdapter.getItem(position);
+                Intent intent = new Intent(MenteeOptionsActivity.this, ProposalInformationActivity.class);
+                intent.putExtra("PROPOSAL_INFO", p);
                 startActivity(intent);
             }
         });

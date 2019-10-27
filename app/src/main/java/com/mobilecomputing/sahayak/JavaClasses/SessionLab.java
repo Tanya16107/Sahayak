@@ -2,7 +2,6 @@ package com.mobilecomputing.sahayak.JavaClasses;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 
@@ -18,22 +17,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProposalLab {
-    private static ProposalLab sproposalLab;
-    private List<Proposal> mProposals = new ArrayList<>();
+public class SessionLab {
+    private static SessionLab ssessionLab;
+    private List<Session> mSessions = new ArrayList<>();
     private DatabaseReference mDatabase;
-    private ProgressBar progressBar;
 
-    private ProposalLab(final Context context) {
-        mDatabase = FirebaseDatabase.getInstance().getReference("active_proposals");
+    private SessionLab(Context context) {
+        mDatabase = FirebaseDatabase.getInstance().getReference("all_sessions");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mProposals.clear();
+                mSessions.clear();
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        Proposal p = ds.getValue(Proposal.class);
-                        mProposals.add(p);
+                        Session p = ds.getValue(Session.class);
+                        mSessions.add(p);
                     }
                 }
             }
@@ -45,31 +43,29 @@ public class ProposalLab {
         });
     }
 
-    public static ProposalLab get(Context context) {
-        if (sproposalLab == null) {
-            sproposalLab = new ProposalLab(context);
+    public static SessionLab get(Context context) {
+        if (ssessionLab == null) {
+            ssessionLab = new SessionLab(context);
         }
-        return sproposalLab;
+        return ssessionLab;
     }
 
-    public void AddProposal(Proposal proposal) {
-        mDatabase = FirebaseDatabase.getInstance().getReference("active_proposals");
-        DatabaseReference dref = mDatabase.push();
+    public void AddSession(Session nsession) {
+        mDatabase = FirebaseDatabase.getInstance().getReference("all_sessions");
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String email = currentUser.getEmail();
-        proposal.setMentorName(email);
-        proposal.setCloudID(dref.getKey());
+        nsession.setStudent(email);
         // TODO: Handle Duplicates
-        dref.setValue(proposal);
+        mDatabase.push().setValue(nsession);
     }
 
-    public List<Proposal> getProposals() {
-        Log.d("ProposalLab", "Getting " + mProposals.size() + " Proposals " + mProposals.getClass().getSimpleName());
-        return mProposals;
+    public List<Session> getSessions() {
+        Log.d("SessionLab", "Getting " + mSessions.size() + " Sessions " + mSessions.getClass().getSimpleName());
+        return mSessions;
     }
 
-    public Proposal getProposal(int id) {
-        for (Proposal p : mProposals) {
+    public Session getSession(int id) {
+        for (Session p : mSessions) {
             if (p.getID() == id) {
                 return p;
             }
