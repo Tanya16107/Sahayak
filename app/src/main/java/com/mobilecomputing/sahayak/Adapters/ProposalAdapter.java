@@ -9,20 +9,26 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mobilecomputing.sahayak.Activities.MenteeOptionsActivity;
 import com.mobilecomputing.sahayak.JavaClasses.Proposal;
 import com.mobilecomputing.sahayak.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.ProposalHolder> {
 
     private List<Proposal> mProposals;
+    private List<Proposal> store;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     public ProposalAdapter(Context context, List<Proposal> proposals) {
         this.mInflater = LayoutInflater.from(context);
         this.mProposals = proposals;
+        store=new ArrayList<Proposal>();
+        store.addAll(this.mProposals);
     }
 
     @Override
@@ -84,5 +90,25 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
+    }
+
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        mProposals.clear();
+        if (charText.length() == 0) {
+            mProposals.addAll(store);
+        } else {
+            for (Proposal wp : store) {
+                if (wp.getSkill().toLowerCase(Locale.getDefault()).contains(charText)
+                || wp.getCategory().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    mProposals.add(wp);
+                    Log.d("Filter","Filtered:"+wp.getSkill());
+                }
+            }
+//            MenteeOptionsActivity.proposals=tmp;
+//            mProposals = MenteeOptionsActivity.proposals;
+        }
+        notifyDataSetChanged();
+        Log.d("Filter",store.size()+" "+mProposals.size());
     }
 }
