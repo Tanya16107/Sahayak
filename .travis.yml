@@ -2,15 +2,23 @@ language: android
 dist: trusty
 android:
   components:
-    # The BuildTools version used by your project
-    - build-tools-29.0.1
-
-    # The SDK version used to compile your project
-    - android-29
-
-before_script: 
-    - chmod +x gradlew
-    - openssl aes-256-cbc -K $encrypted_2844885ced97_key -iv $encrypted_2844885ced97_iv -in app/ci_secret.txt -out app/google-services.json -d
-
+  - build-tools-29.0.1
+  - android-29
+before_script:
+- chmod +x gradlew
+- openssl aes-256-cbc -K $encrypted_2844885ced97_key -iv $encrypted_2844885ced97_iv -in cloud.tar.gz.enc -out cloud.tar.gz -d
+- tar -xvf cloud.tar.gz
+- ls -la
 script:
-    - ./gradlew build
+- "./gradlew clean build assembleRelease"
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: ngLvYtd5/lQqLjm65B3vkBBwMKdbQEbkReBeKbJOwNogOOMcrFTBnKHOCud0otk0JMYZPYNI5Dcp8MaPcyqwrmmVTQRSCphx/xZbOYH9ivNisSJhAW7b/OO6bYFcFY1XyP3yrhJ4fAqHJA0JdCTlG7qY/BqkYKuBWG4xEdbkxfiD/MbD2nCP5yU2NQ2fejPcEBaK4rSRprF1WauugPfjaIxGoU8hmsbr+gGCBWbJ5Pi7cQEwRvaB4lz8afuBJ++J/fLB88HTs3dh0h31Pg7uSeBe+nJuZmwd0AviY4kQrjGN/LOV91cYajxEn+99Bx2gWwddY6yheT/hpjC8Ha1cTjWj7QytAnG1CAQdmNFAEk5qDR2TT+uxxdWjFBnODOBda39xTbsY71WFx24MHmicelaEozT4RvZb38JvwASv19uW3ZHnnqbLo+ocWD57KWPsucoKEuMQSpXoMDy6rLcDrgXz4HGA6JlpnKiJ505uSTZUdt8nCHRvgM1UnqaK7ENv9xGxKClCoRmJT4YkHZ+7g8du7TFSt21/HSwLtSRCRuFqjkOTxQSbYPmTmncn1ZMJto0u1D5ppQcffVvRVmwOO/3UyR9YWZ9v+IwR3VYTOdxvAFMeqDQpdHhQKtIQEPc4kpQI2TTF47ERvAzSvGBOlZuxx5oIUXsu44LuizKz8Co=
+  file: app/build/outputs/apk/release/app-release.apk
+  on:
+    branch: apk_deploy
+    repo: virresh/Sahaayak
+after_success:
+- sh set_tags.sh
