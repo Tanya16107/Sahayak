@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Activities.MentorOptionsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/categoryMentor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="Select Category" />
+
+        <Spinner
+            android:id="@+id/MentorOptionCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <EditText
+            android:id="@+id/skillsMentor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="16sp"
+            android:backgroundTint="@color/lightGrey"
+            android:layout_marginTop="8dp"
+            android:hint="Enter skills"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="32dp"/>
+
+    <!--    <Button-->
+    <!--        android:id="@+id/setDate"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:text="Select Date" />-->
+
+        <Button
+            android:id="@+id/setDate"
+            android:layout_width="140dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_date_range_black_24dp"
+            android:drawablePadding="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Select Date" />
+
+
+        <Button
+            android:id="@+id/setTime"
+            android:layout_width="140dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_access_time_black_24dp"
+            android:drawablePadding="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Select Time" />
+
+        <TextView
+            android:id="@+id/textViewDateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="32dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="32dp"
+            android:text="Select Total Session Time" />
+
+<!--        <Spinner-->
+<!--            android:id="@+id/selectMinutes"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            />-->
+
+        <TextView
+            android:id="@+id/textViewSessionTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <SeekBar
+            android:id="@+id/seekBarSessionTime"
+            style="@style/Widget.AppCompat.SeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="24"
+            android:progress="4" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="32dp"
+            android:text="Select Time Cap"/>
+
+<!--        <Spinner-->
+<!--            android:id="@+id/selectMinutes2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content" />-->
+
+        <TextView
+            android:id="@+id/textViewTimeCap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <SeekBar
+            android:id="@+id/seekBarTimeCap"
+            style="@style/Widget.AppCompat.SeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="60dp" />
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_add_circle_outline_black_24dp"
+            android:paddingLeft="8dp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:text="Add" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
