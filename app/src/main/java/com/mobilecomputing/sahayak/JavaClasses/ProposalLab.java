@@ -68,9 +68,9 @@ public class ProposalLab {
         return mProposals;
     }
 
-    public Proposal getProposal(int id) {
+    public Proposal getProposal(String cloudID) {
         for (Proposal p : mProposals) {
-            if (p.getID() == id) {
+            if (p.getCloudID().equals(cloudID)) {
                 return p;
             }
         }
