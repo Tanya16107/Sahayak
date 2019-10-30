@@ -13,4 +13,7 @@
 .externalNativeBuild
 .idea/
 app/google-services.json
+cloud.tar.gz
+sahayak.jks
+dummykeystore.properties
 
