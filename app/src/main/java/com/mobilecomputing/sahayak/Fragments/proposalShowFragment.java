@@ -19,6 +19,8 @@ import com.mobilecomputing.sahayak.JavaClasses.Session;
 import com.mobilecomputing.sahayak.JavaClasses.SessionLab;
 import com.mobilecomputing.sahayak.R;
 
+import java.util.Calendar;
+
 public class proposalShowFragment extends Fragment {
 
     public proposalShowFragment() {
@@ -52,8 +54,10 @@ public class proposalShowFragment extends Fragment {
         mProposal_description.setText("Category: " + mProposal.getCategory());
         //mProposal_description.setText("Description: " + mProposal.getDescription());
 
-        int sh = mProposal.startHour;
-        int sm = mProposal.startMin;
+        Calendar startCalendar = Calendar.getInstance();
+        startCalendar.setTime(mProposal.getStartDate());
+        int sh = startCalendar.HOUR_OF_DAY;
+        int sm = startCalendar.MINUTE;
         if(sm<30){
             sm=0;
         }

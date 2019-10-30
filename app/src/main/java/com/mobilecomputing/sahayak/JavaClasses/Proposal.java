@@ -1,39 +1,31 @@
 package com.mobilecomputing.sahayak.JavaClasses;
 
+import android.util.Log;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 
 @IgnoreExtraProperties
 public class Proposal implements Serializable {
-    public int startHour;
-    public int startMin;
-    public int endHour;
-    public int endMin;
-    int ID;
-    private String mentorName;
-    private int mentorRating;
+
+    private String cloudID;
     private String category;
     private String skill;
-    private String description;
-    private String cloudID;
+    private Date startDate;
+    private int duration;
     private int durationCap;
+    private String mentorName;
+    private float rating;
 
-    public Proposal() {
-        // required empty constructor
+    public String getCloudID() {
+        return cloudID;
     }
 
-    public Proposal(int i, String s) {
-        ID = i;
-        skill = s;
-    }
-
-    public String getMentorName() {
-        return mentorName;
-    }
-
-    public void setMentorName(String mentorName) {
-        this.mentorName = mentorName;
+    public void setCloudID(String cloudID) {
+        this.cloudID = cloudID;
     }
 
     public String getCategory() {
@@ -44,6 +36,30 @@ public class Proposal implements Serializable {
         this.category = category;
     }
 
+    public String getSkill() {
+        return skill;
+    }
+
+    public void setSkill(String skill) {
+        this.skill = skill;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     public int getDurationCap() {
         return durationCap;
     }
@@ -52,72 +68,64 @@ public class Proposal implements Serializable {
         this.durationCap = durationCap;
     }
 
-    public int getID() {
-        return ID;
+    public String getMentorName() {
+        return mentorName;
     }
 
-    public void setID(int id) {
-        this.ID = id;
+    public void setMentorName(String mentorName) {
+        this.mentorName = mentorName;
     }
 
-    public String getSkill() {
-        return skill;
+    public float getRating() {
+        return rating;
     }
 
-    public void setMentorRating(int r) {
-        mentorRating = r;
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
-    public int getRating() {
-        return mentorRating;
+    public Proposal() {
+        // required empty constructor
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public Proposal(String category, String skill, Date startDate, int duration, int durationCap) {
+        this.category = category;
+        this.skill = skill;
+        this.startDate = startDate;
+        this.duration = duration;
+        this.durationCap = durationCap;
 
-    public void setDescription(String d) {
-        description = d;
-    }
-
-    public String getCloudID() {
-        return cloudID;
-    }
-
-    public void setCloudID(String cloudID) {
-        this.cloudID = cloudID;
-    }
-
-    public void setTimeWindow(int sh, int sm, int eh, int em) {
-        startHour = sh;
-        startMin = sm;
-        endHour = eh;
-        endMin = em;
+        Calendar startCalendar = Calendar.getInstance();
+        startCalendar.setTime(startDate);
+        Log.d("Calendar", Integer.toString(startCalendar.get(Calendar.YEAR)));
     }
 
     public String getTimeWindow() {
 
+        Calendar startCalendar = Calendar.getInstance();
+        startCalendar.setTime(startDate);
+        Calendar endCalendar = Calendar.getInstance();
+        endCalendar.setTime(startDate);
+        endCalendar.add(Calendar.MINUTE, duration);
+
+        int startHour = startCalendar.get(Calendar.HOUR_OF_DAY);
+        int startMin = startCalendar.get(Calendar.MINUTE);
+        int endHour = endCalendar.get(Calendar.HOUR_OF_DAY);
+        int endMin = endCalendar.get(Calendar.MINUTE);
+
         String S = "";
-        String tmp[] = {"00", "30"};
-        if(startMin<30){
-            startMin=0;
-        }
-        else {
-            startMin=1;
-        }
-
-        if (startHour < 10) {
-            S += "0" + startHour + "" + tmp[startMin];
-        } else {
-            S += startHour + "" + tmp[startMin];
-        }
-
-        S += "-";
-        if (endHour < 10) {
-            S += "0" + endHour + "" + endMin;
-        } else {
-            S += endHour + "" + endMin;
-        }
+        if(startHour < 10)
+            S += "0";
+        S += startHour + ":";
+        if(startMin < 10)
+            S += "0";
+        S += startMin + "-";
+        if(endHour < 10)
+            S += "0";
+        S += endHour + ":";
+        if(endMin < 10)
+            S += "0";
+        S += endMin;
         return S;
     }
 }
