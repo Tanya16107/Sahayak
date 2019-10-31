@@ -10,13 +10,15 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical">
 
             <TextView
@@ -58,41 +60,97 @@
             <!--        android:layout_gravity="center"-->
             <!--        android:text="Select Date" />-->
 
-            <Button
-                android:id="@+id/setDate"
-                android:layout_width="140dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:drawableLeft="@drawable/ic_date_range_black_24dp"
-                android:drawablePadding="8dp"
-                android:layout_marginTop="16dp"
-                android:text="Select Date" />
 
-
-            <Button
-                android:id="@+id/setTime"
-                android:layout_width="140dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:drawableLeft="@drawable/ic_access_time_black_24dp"
-                android:drawablePadding="8dp"
-                android:layout_marginTop="16dp"
-                android:text="Select Time" />
-
-            <TextView
-                android:id="@+id/textViewDateTime"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="32dp"
-                android:layout_gravity="center" />
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/setDate"
+                    android:layout_width="140dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                    android:drawablePadding="8dp"
+                    android:text="Select Date" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewDate"
+                    android:paddingLeft="16dp"
+                    android:text=""
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/setTime"
+                    android:layout_width="140dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                    android:drawablePadding="8dp"
+                    android:text="Select Time" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewTime"
+                    android:paddingLeft="16dp"
+                    android:text=""
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+
+            <!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:gravity="center">-->
+<!--    -->
+<!--                <Button-->
+<!--                    android:id="@+id/setTime"-->
+<!--                    android:layout_width="140dp"-->
+<!--                    android:paddingLeft="8dp"-->
+<!--                    android:paddingRight="8dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@color/colorPrimary"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:drawableLeft="@drawable/ic_access_time_black_24dp"-->
+<!--                    android:drawablePadding="8dp"-->
+<!--                    android:text="Select Time" />-->
+<!--    -->
+<!--                <TextView-->
+<!--                    android:id="@+id/textViewTime"-->
+<!--                    android:paddingLeft="16dp"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="17:00" />-->
+<!--    -->
+<!--            </LinearLayout>-->
 
             <TextView
                 android:id="@+id/textView3"
@@ -156,6 +214,7 @@
                 android:background="@color/colorPrimary"
                 android:drawableLeft="@drawable/ic_add_circle_outline_black_24dp"
                 android:paddingLeft="8dp"
+                android:layout_marginBottom="16dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:text="Add" />

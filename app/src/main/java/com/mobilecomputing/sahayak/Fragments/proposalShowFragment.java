@@ -21,6 +21,8 @@ import com.mobilecomputing.sahayak.R;
 
 import java.util.Calendar;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class proposalShowFragment extends Fragment {
 
     public proposalShowFragment() {
@@ -120,8 +122,17 @@ public class proposalShowFragment extends Fragment {
                 SessionLab sl = SessionLab.get(view.getContext());
                 Session newSession = new Session(sl.getSessions().size(), mProposal);
                 sl.AddSession(newSession);
-                Toast.makeText(view.getContext(), "Session for " + newSession.getSkill() + " requested successfully!", Toast.LENGTH_SHORT).show();
-                proposalShowFragment.this.getActivity().finish();
+                //Toast.makeText(view.getContext(), "Session for " + newSession.getSkill() + " requested successfully!", Toast.LENGTH_SHORT).show();
+                new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("Session requested successfully!")
+                        .setConfirmText("Okay")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                proposalShowFragment.this.getActivity().finish();
+                            }
+                        })
+                        .show();
             }
         });
 
