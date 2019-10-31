@@ -70,7 +70,10 @@ public class MentorOptionsActivity extends AppCompatActivity {
         mMinute = 0;
         mIs24HourView = true;
 
-        final TextView textViewDateTime = (TextView) findViewById(R.id.textViewDateTime);
+        final TextView textViewDate = (TextView) findViewById(R.id.textViewDate);
+        textViewDate.setText("");
+        final TextView textViewTime = (TextView) findViewById(R.id.textViewTime);
+        textViewTime.setText("");
 
         setDate.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -95,7 +98,7 @@ public class MentorOptionsActivity extends AppCompatActivity {
                 mYear = i;
                 mMonth = i1;
                 mDayOfMonth = i2;
-                textViewDateTime.setText(dateAndTime());
+                textViewDate.setText(dateAndTime().split(" ")[0]);
             }
         };
 
@@ -118,11 +121,14 @@ public class MentorOptionsActivity extends AppCompatActivity {
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 mHourOfDay = i;
                 mMinute = i1;
-                textViewDateTime.setText(dateAndTime());
+                textViewTime.setText(dateAndTime().split(" ")[1]);
             }
+
         };
 
-        textViewDateTime.setText(dateAndTime());
+        textViewDate.setText(dateAndTime().split(" ")[0]);
+        textViewTime.setText(dateAndTime().split(" ")[1]);
+
 
         final SeekBar seekBarSessionTime = (SeekBar) findViewById(R.id.seekBarSessionTime);
         final TextView textViewSessionTime = (TextView) findViewById(R.id.textViewSessionTime);
