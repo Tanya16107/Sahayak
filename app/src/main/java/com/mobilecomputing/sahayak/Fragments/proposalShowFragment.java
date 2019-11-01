@@ -6,20 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.mobilecomputing.sahayak.JavaClasses.Proposal;
 import com.mobilecomputing.sahayak.JavaClasses.Session;
 import com.mobilecomputing.sahayak.JavaClasses.SessionLab;
 import com.mobilecomputing.sahayak.R;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -42,9 +43,14 @@ public class proposalShowFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        final int[] numberOfChecks = {0};
+        final ArrayList<Date> checkedTimes = new ArrayList<Date>();
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_proposal_show, container, false);
+        final Button b = (Button) v.findViewById(R.id.submitButton);
         final Proposal mProposal = (Proposal) getArguments().getSerializable("PROPOSAL_INFO");
+
+        LinearLayout sessionsLayout= (LinearLayout) v.findViewById(R.id.sessionsList);
 
         TextView mProposal_skill = (TextView) v.findViewById(R.id.proposal_skill);
         mProposal_skill.setText(mProposal.getSkill());
@@ -56,72 +62,54 @@ public class proposalShowFragment extends Fragment {
         mProposal_description.setText("Category: " + mProposal.getCategory());
         //mProposal_description.setText("Description: " + mProposal.getDescription());
 
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         Calendar startCalendar = Calendar.getInstance();
         startCalendar.setTime(mProposal.getStartDate());
-        int sh = startCalendar.HOUR_OF_DAY;
-        int sm = startCalendar.MINUTE;
-        if(sm<30){
-            sm=0;
-        }
-        else{
-            sm=1;
-        }
 
-        String tmp[] = {"00", "30"};
-        final CheckBox rb1 = (CheckBox) v.findViewById(R.id.radioButton);
-        String xyz = "";
+        int quanta = 15;
+        int running_sum = 0;
+        while(running_sum<mProposal.getDuration()){
+            final Date start = startCalendar.getTime();
+            startCalendar.add(Calendar.MINUTE, quanta);
+            running_sum+=quanta;
+            Date end = startCalendar.getTime();
 
-        // TODO: Use proper variable names so that purpose of code is clear
-        if (sm == 1) {
-            xyz = "";
-            if (sh < 10) {
-                xyz = "0";
-            }
-            xyz += sh + "" + tmp[sm] + "-";
-            if (sh + 1 < 10) {
-                xyz += "0";
-            }
-            xyz += (sh + 1) + "" + tmp[sm - 1];
-            rb1.setText(xyz);
-        } else {
-            xyz = "";
-            if (sh < 10) {
-                xyz = "0";
-            }
-            xyz += sh + "" + tmp[sm] + "-" + sh + "" + tmp[sm + 1];
-            rb1.setText(xyz);
-        }
+            final CheckBox sessionCheckBox = new CheckBox(getContext());
+            sessionCheckBox.setText(dateFormat.format(start)+" - "+dateFormat.format(end));
+            sessionsLayout.addView(sessionCheckBox);
 
-        final CheckBox rb2 = (CheckBox) v.findViewById(R.id.radioButton2);
-        if (sm == 1) {
-            xyz = "";
-            if (sh + 1 < 10) {
-                xyz += "0" + (sh + 1) + "" + tmp[sm - 1] + "-0" + (sh + 1) + tmp[sm];
-            } else {
-                xyz += (sh + 1) + "" + tmp[sm - 1] + "-" + (sh + 1) + tmp[sm];
-            }
+            sessionCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                        numberOfChecks[0] +=1;
+                        checkedTimes.add(start);
+                     }
+                    else if(!isChecked){
+                        numberOfChecks[0] -=1;
+                        checkedTimes.remove(start);
+                    }
+                    if(numberOfChecks[0]<=0){
+                        b.setEnabled(false);
+                    }
+                    else if(numberOfChecks[0]>0){
+                        b.setEnabled(true);
+                    }
+                }
+            });
 
-            rb2.setText(xyz);
-        } else {
-            xyz = "";
-            if (sh < 10) {
-                xyz = "0";
-            }
-            xyz += sh + "" + tmp[sm + 1] + "-";
-            if (sh + 1 < 10) {
-                xyz += "0";
-            }
-            xyz += (sh + 1) + "" + tmp[sm];
-            rb2.setText(xyz);
         }
 
-        final Button b = (Button) v.findViewById(R.id.submitButton);
+
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SessionLab sl = SessionLab.get(view.getContext());
-                Session newSession = new Session(sl.getSessions().size(), mProposal);
-                sl.AddSession(newSession);
+
+                for(int i=0; i<checkedTimes.size(); i++){
+                    Session newSession = new Session(sl.getSessions().size(), mProposal);
+                    newSession.setInteractionDate(checkedTimes.get(i));
+                    sl.AddSession(newSession);
+                }
                 //Toast.makeText(view.getContext(), "Session for " + newSession.getSkill() + " requested successfully!", Toast.LENGTH_SHORT).show();
                 new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
                         .setTitleText("Session requested successfully!")
@@ -136,34 +124,7 @@ public class proposalShowFragment extends Fragment {
             }
         });
 
-        rb1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(rb1.isChecked() || rb2.isChecked())
-                {
-                    b.setEnabled(true);
-                }
-                else
-                {
-                    b.setEnabled(false);
-                }
-            }
-        });
-
-        rb2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(rb1.isChecked() || rb2.isChecked())
-                {
-                    b.setEnabled(true);
-                }
-                else
-                {
-                    b.setEnabled(false);
-                }
-            }
-        });
-
+        //submit only if at least one session is checked
         return v;
     }
 
