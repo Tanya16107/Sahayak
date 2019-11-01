@@ -2,7 +2,6 @@ package com.mobilecomputing.sahayak.JavaClasses;
 
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Session implements Serializable {
@@ -78,8 +77,8 @@ public class Session implements Serializable {
         // Initialise session from a proposal
         this.setID(ID);
         this.setTeacher(p.getMentorName());
-        this.setInteractionDate(Calendar.getInstance().getTime());
         this.setSkill(p.getSkill());
+        this.setDuration(15);
     }
 
 }
