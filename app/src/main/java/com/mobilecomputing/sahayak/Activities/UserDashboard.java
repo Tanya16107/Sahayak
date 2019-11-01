@@ -20,6 +20,8 @@ public class UserDashboard extends AppCompatActivity {
 
         CardView btn_learn_something = (CardView) findViewById(R.id.learn_something);
         CardView btn_teach_something = (CardView) findViewById(R.id.teach_something);
+        Button btn_view_teacher_meetings = (Button) findViewById(R.id.teacher_meeting_btn);
+        Button btn_view_student_meetings = (Button) findViewById(R.id.student_meeting_btn);
         ProposalLab.get(this);
 
         btn_learn_something.setOnClickListener(new View.OnClickListener() {
@@ -36,5 +38,24 @@ public class UserDashboard extends AppCompatActivity {
                 startActivity(student_dashboard_intent);
             }
         });
+
+        btn_view_teacher_meetings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent student_dashboard_intent = new Intent(UserDashboard.this, MentorMeetings.class);
+                startActivity(student_dashboard_intent);
+            }
+        });
+
+        btn_view_student_meetings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent student_dashboard_intent = new Intent(UserDashboard.this, MenteeMeetings.class);
+                startActivity(student_dashboard_intent);
+            }
+        });
+
+
+
     }
 }
