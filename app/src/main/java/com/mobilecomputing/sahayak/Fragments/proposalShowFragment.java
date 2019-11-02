@@ -20,8 +20,10 @@ import com.mobilecomputing.sahayak.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -98,16 +100,23 @@ public class proposalShowFragment extends Fragment {
             taken.add(false);
             for (int i = 0; i < eSessions_mProposal.size(); i++) {
                 Session e = eSessions_mProposal.get(i);
-                if (start.equals(e.getInteractionDate())) {
-                    sessionCheckBox.setEnabled(false);
-                    taken.set((taken.size() - 1), true);
-                    durationTracker[0] += quanta;
+                Date ssDate = e.getInteractionDate();
+                int ssDuration = e.getDuration();
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(ssDate);
+
+                while (ssDuration>0){
+                    if (start.equals(cal.getTime())) {
+                        sessionCheckBox.setEnabled(false);
+                        taken.set((taken.size() - 1), true);
+                        durationTracker[0] += quanta;
+                    }
+                    cal.add(Calendar.MINUTE, 15);
+                    ssDuration-=15;
                 }
             }
 
-            if (durationTracker[0] >= durationCap) {
-                sessionCheckBox.setEnabled(false);
-            }
 
             sessionCheckBox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -138,6 +147,9 @@ public class proposalShowFragment extends Fragment {
 
                         if (durationTracker[0] >= durationCap) {
                             //if strictly greater, then uncheck this also and show dialogue
+                            new SweetAlertDialog(getContext())
+                                    .setContentText("The mentor is not available for more than " + durationCap + " minutes")
+                                    .show();
                             if (durationTracker[0] > durationCap) {
                                 numberOfChecks[0] -= 1;
                                 durationTracker[0] -= 15;
@@ -174,16 +186,51 @@ public class proposalShowFragment extends Fragment {
         }
 
 
+        if (durationTracker[0] >= durationCap) {
+            for (int i = 0; i < sessionsLayout.getChildCount(); i++) {
+                View cbView = sessionsLayout.getChildAt(i);
+                if (cbView instanceof CheckBox) {
+                    cbView.setEnabled(false);
+
+                }
+            }
+        }
+
+
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SessionLab sl = SessionLab.get(view.getContext());
 
-                for (int i = 0; i < checkedTimes.size(); i++) {
-                    Session newSession = new Session(sl.getSessions().size(), mProposal);
-                    newSession.setInteractionDate(checkedTimes.get(i));
-                    sl.AddSession(newSession);
+                Collections.sort(checkedTimes);
+
+                Date ssDate = checkedTimes.get(0);
+                checkedTimes.remove(ssDate);
+                Session newSession = newSession = new Session(sl.getSessions().size(), mProposal);
+                newSession.setInteractionDate(ssDate);
+                int ssDuration = 15;
+                while(checkedTimes.size()>0){
+                    long difference = TimeUnit.MILLISECONDS.toMinutes(checkedTimes.get(0).getTime() - ssDate.getTime());
+
+                    ssDate = checkedTimes.get(0);
+                    checkedTimes.remove(ssDate);
+                    if(difference>15){
+                        newSession.setDuration(ssDuration);
+                        sl.AddSession(newSession);
+
+                        newSession = new Session(sl.getSessions().size(), mProposal);
+                        newSession.setInteractionDate(ssDate);
+                        ssDuration = 15;
+
+                    }
+                    else {
+                        ssDuration+=15;
+                    }
+
                 }
+                newSession.setDuration(ssDuration);
+                sl.AddSession(newSession);
+
                 //Toast.makeText(view.getContext(), "Session for " + newSession.getSkill() + " requested successfully!", Toast.LENGTH_SHORT).show();
                 new SweetAlertDialog(getContext(), SweetAlertDialog.SUCCESS_TYPE)
                         .setTitleText("Session requested successfully!")
