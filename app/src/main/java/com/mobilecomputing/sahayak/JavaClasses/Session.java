@@ -13,6 +13,34 @@ public class Session implements Serializable {
     int duration;  // in minutes
     String skill;
 
+    // function to generate a random string of length n
+    static String getAlphaNumericString(int n)
+    {
+
+        // chose a Character random from this String
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
+
+        // create StringBuffer size of AlphaNumericString
+        StringBuilder sb = new StringBuilder(n);
+
+        for (int i = 0; i < n; i++) {
+
+            // generate a random number between
+            // 0 to AlphaNumericString variable length
+            int index
+                    = (int)(AlphaNumericString.length()
+                    * Math.random());
+
+            // add Character one by one in end of sb
+            sb.append(AlphaNumericString
+                    .charAt(index));
+        }
+
+        return sb.toString();
+    }
+
     public int getID() {
         return ID;
     }
@@ -76,6 +104,7 @@ public class Session implements Serializable {
     public Session(int ID, Proposal p){
         // Initialise session from a proposal
         this.setID(ID);
+        this.setCloudID(getAlphaNumericString(10));
         this.setTeacher(p.getMentorName());
         this.setSkill(p.getSkill());
         this.setDuration(15);
