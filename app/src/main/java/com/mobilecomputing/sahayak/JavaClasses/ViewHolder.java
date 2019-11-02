@@ -47,11 +47,11 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         TextView date = mView.findViewById(R.id.interaction_date);
         TextView skill = mView.findViewById(R.id.skill);
 
-        teacher.setText("Mentor: "+sTeacher);
-        student.setText("Mentee: "+sStudent);
-        duration.setText("Duration: "+sDuration);
-        date.setText("Date: "+sDate);
-        skill.setText("Skill: "+sSkill);
+        teacher.setText(sTeacher);
+        student.setText(sStudent);
+        duration.setText(sDuration);
+        date.setText(sDate);
+        skill.setText(sSkill);
 //        Picasso.get().load(image).into(mImageIv);
     }
 

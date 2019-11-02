@@ -23,6 +23,10 @@ android {
     }
 
     def isRunningOnTravis = System.getenv("CI") == "true"
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 
     if (isRunningOnTravis) {
         // configure keystore
@@ -55,6 +59,10 @@ dependencies {
     implementation 'com.github.f0ris.sweetalert:library:1.5.6'
     implementation 'com.code-troopers.betterpickers:library:3.1.0'
     implementation 'com.firebaseui:firebase-ui-database:0.4.0'
-
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.2.0'
+    implementation 'com.neovisionaries:nv-websocket-client:2.9'
+    implementation 'org.webrtc:google-webrtc:1.0.28513'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
 
 }

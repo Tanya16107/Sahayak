@@ -13,46 +13,140 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/teacher"
-            android:text="Teacher"
-            android:textColor="#000"
-            android:textSize="22sp"
-            android:fontFamily="@font/ralewayregular"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/student"
-            android:text="Student"
-            android:textColor="#000"
-            android:textSize="22sp"
-            android:fontFamily="@font/ralewayregular"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.83"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:text="Mentor: " />
+            <TextView
+                android:id="@+id/teacher"
+                android:text="Teacher"
+                android:layout_weight="0.17"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/duration"
-            android:text="Duration"
-            android:textColor="#000"
-            android:textSize="22sp"
-            android:fontFamily="@font/ralewayregular"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="0.83"
+                android:paddingTop="4dp"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:text="Mentee: " />
+
+            <TextView
+                android:id="@+id/student"
+                android:text="Student"
+                android:textSize="14sp"
+                android:layout_weight="0.17"
+                android:fontFamily="sans-serif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/interaction_date"
-            android:text="Date"
-            android:textColor="#000"
-            android:textSize="22sp"
-            android:fontFamily="@font/ralewayregular"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_weight="0.83"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="Duration: " />
+
+            <TextView
+                android:id="@+id/duration"
+                android:text="Duration"
+                android:layout_weight="0.17"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/skill"
-            android:text="Skill"
-            android:textColor="#000"
-            android:textSize="22sp"
-            android:fontFamily="@font/ralewayregular"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="0.83"
+                android:textSize="14sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="Date:" />
+
+            <TextView
+                android:id="@+id/interaction_date"
+                android:text="Date"
+                android:textSize="14sp"
+                android:layout_weight="0.17"
+                android:fontFamily="sans-serif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_weight="0.83"
+                android:textSize="14sp"
+                android:paddingTop="4dp"
+                android:fontFamily="sans-serif"
+                android:text="Skill:" />
+
+            <TextView
+                android:id="@+id/skill"
+                android:text="Skill"
+                android:textSize="14sp"
+                android:layout_weight="0.17"
+                android:fontFamily="sans-serif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
