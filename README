@@ -5,3 +5,15 @@ Your learning partner
 Mobile Computing Monsoon 2019 Project
 
 Private Project Folder: https://drive.google.com/drive/folders/1mEZhpN2rTYC5lfGL4ILTdAv0MHTjCtTb?usp=sharing
+
+Set-up docker
+sudo apt-get install docker.io
+
+Navigate to the folder openvidu_extras
+Run script.sh with ./script.sh
+
+This will setup a server on your machine.
+In the strings.xml file, replace the IP Address with your machine's IP Address.
+For example,    <string name="default_openvidu_url">https://192.168.0.8:4443/</string> 192.168.0.8 is my system's IP Address.
+
+Build the app and run it.
