@@ -35,6 +35,9 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mobilecomputing.sahayak.R;
 import com.mobilecomputing.sahayak.Fragments.PermissionsDialogFragment;
 import com.mobilecomputing.sahayak.openvidu.LocalParticipant;
@@ -78,21 +81,28 @@ public class SessionActivity extends AppCompatActivity {
     private Session session;
     private CustomHttpClient httpClient;
     private String sessionId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.call_screen);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         askForPermissions();
         Bundle extras = getIntent().getExtras();
-        String newString;
+        String newString,urlString;
         if(extras == null) {
             newString= null;
+            urlString=null;
         } else {
             newString= extras.getString("Meeting ID");
+            urlString=extras.getString("URL");
+
         }
         sessionId = newString;
+        OPENVIDU_URL=urlString;
+        Log.d(TAG, "onCreate: "+OPENVIDU_URL);
         //session_name.setText(sessionId);
         ButterKnife.bind(this);
         Random random = new Random();
@@ -139,7 +149,6 @@ public class SessionActivity extends AppCompatActivity {
             initViews();
             viewToConnectingState();
 
-            OPENVIDU_URL = openvidu_url.getText().toString();
             OPENVIDU_SECRET = openvidu_secret.getText().toString();
             httpClient = new CustomHttpClient(OPENVIDU_URL, "Basic " + android.util.Base64.encodeToString(("OPENVIDUAPP:" + OPENVIDU_SECRET).getBytes(), android.util.Base64.DEFAULT).trim());
 
