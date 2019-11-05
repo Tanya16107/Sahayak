@@ -107,7 +107,7 @@
                     android:background="@color/colorPrimary"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                    android:drawableLeft="@drawable/ic_access_time_black_24dp"
                     android:drawablePadding="8dp"
                     android:text="Select Time" />
 
