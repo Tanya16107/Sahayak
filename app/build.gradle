@@ -64,5 +64,6 @@ dependencies {
     implementation 'com.neovisionaries:nv-websocket-client:2.9'
     implementation 'org.webrtc:google-webrtc:1.0.28513'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
 
 }

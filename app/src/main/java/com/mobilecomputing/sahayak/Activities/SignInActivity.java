@@ -1,5 +1,6 @@
 package com.mobilecomputing.sahayak.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.mobilecomputing.sahayak.FireBaseFCMService;
 import com.mobilecomputing.sahayak.R;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
@@ -71,6 +73,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             // TODO: Possibly pass this user via this intent
                             Intent userDashboardIntent = new Intent(SignInActivity.this, UserDashboard.class);
                             startActivity(userDashboardIntent);
+                            String tok = FireBaseFCMService.getToken(getApplicationContext());
+                            FireBaseFCMService.sendRegistrationToServer(tok);
                             setResult(RESULT_OK);
                             finish();
                         } else {
