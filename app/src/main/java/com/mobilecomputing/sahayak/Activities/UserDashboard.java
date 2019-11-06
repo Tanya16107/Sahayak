@@ -97,7 +97,7 @@ public class UserDashboard extends AppCompatActivity {
                     //Log.d("69969", "onClick: "+sessions.get(i).getStudent()+sessions.get(i).getTeacher()+scheduled);
                     if(sessions.get(i).getTeacher().equals(email) || sessions.get(i).getStudent().equals(email)){
                         //Log.d("69969", "onClick: "+(scheduled.getTime()-current.getTime()));
-                        if(scheduled.getTime()-current.getTime()<=300000 && current.getTime()-scheduled.getTime()<=900000){
+                        if(scheduled.getTime()-current.getTime()<=300000 && current.getTime()-scheduled.getTime()<=sessions.get(i).getDuration()*60000){
                             flag=1;
                             callID=sessions.get(i).getCloudID();
                             break;
