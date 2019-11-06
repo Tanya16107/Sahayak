@@ -19,6 +19,7 @@ import com.google.gson.internal.bind.DateTypeAdapter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -82,8 +83,11 @@ public class ProposalLab {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot proposalSnapshot: dataSnapshot.getChildren()) {
                     Proposal proposal=proposalSnapshot.getValue(Proposal.class);
-                    Log.d(TAG,new Date().toString()+ " -----"+ proposal.getStartDate().toString());
-                    if(proposal.getStartDate().before(new Date())){
+                    Calendar endCalendar = Calendar.getInstance();
+                    endCalendar.setTime(proposal.getStartDate());
+                    endCalendar.add(Calendar.MINUTE, proposal.getDuration());
+                    Log.d(TAG,new Date().toString()+ " -----"+ endCalendar.getTime());
+                    if(endCalendar.getTime().before(new Date())){
                         Log.d(TAG,"before");
                         proposalSnapshot.getRef().removeValue();
                     }
