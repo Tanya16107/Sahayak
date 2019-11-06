@@ -3,6 +3,7 @@ package com.mobilecomputing.sahayak.JavaClasses;
 import android.content.Context;
 import android.util.Log;
 import android.widget.ProgressBar;
+import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
 
@@ -40,8 +41,12 @@ public class ProposalLab {
                 mProposals.clear();
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                         Proposal p = ds.getValue(Proposal.class);
-                        mProposals.add(p);
+                        Log.d(TAG,p.getMentorName()+"----"+ currentUser.getEmail());
+                        if(!p.getMentorName().equals(currentUser.getEmail())){
+                            mProposals.add(p);
+                        }
                     }
                 }
             }
@@ -89,8 +94,8 @@ public class ProposalLab {
             }
 
         });
-    }
 
+    }
     public List<Proposal> getProposals() {
         Log.d("ProposalLab", "Getting " + mProposals.size() + " Proposals " + mProposals.getClass().getSimpleName());
         this.deleteProposals();
