@@ -50,11 +50,11 @@ public class UserDashboard extends AppCompatActivity {
         String em=FirebaseAuth.getInstance().getCurrentUser().getEmail();
         UserClass u=UserClassDBHelper.get(em);
 
-        Random random= new Random();
-        int r=random.nextInt(6);
+//        Random random= new Random();
+//        int r=random.nextInt(6);
 //        u.updateRating(r);
-        Log.d("MUI_branch","Before Update:"+r+" "+u.getRating()+" "+u.getTotalSessions());
-        UserClassDBHelper.updateUser(em,r);
+//        Log.d("MUI_branch","Before Update:"+r+" "+u.getRating()+" "+u.getTotalSessions());
+//        UserClassDBHelper.updateUser(em,r);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("URL");
