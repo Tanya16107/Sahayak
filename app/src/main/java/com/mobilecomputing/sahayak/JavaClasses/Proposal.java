@@ -84,6 +84,8 @@ public class Proposal implements Serializable {
         this.rating = rating;
     }
 
+    public String getRatingString() {return String.format("%.1f",rating);}
+
     public Proposal() {
         // required empty constructor
     }

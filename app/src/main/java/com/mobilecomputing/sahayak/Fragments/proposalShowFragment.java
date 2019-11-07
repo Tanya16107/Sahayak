@@ -66,7 +66,7 @@ public class proposalShowFragment extends Fragment {
         mProposal_skill.setText(mSkill);
 
         TextView mProposal_rating = (TextView) v.findViewById(R.id.proposal_rating);
-        mProposal_rating.setText("Instructor Rating: " + mProposal.getRating());
+        mProposal_rating.setText("Instructor Rating: " + mProposal.getRatingString());
 
         TextView mProposal_description = (TextView) v.findViewById(R.id.proposal_description);
         mProposal_description.setText("Category: " + mProposal.getCategory());

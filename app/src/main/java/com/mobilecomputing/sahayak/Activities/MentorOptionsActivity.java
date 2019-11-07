@@ -15,9 +15,12 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.mobilecomputing.sahayak.JavaClasses.CustomTimePickerDialog;
 import com.mobilecomputing.sahayak.JavaClasses.Proposal;
 import com.mobilecomputing.sahayak.JavaClasses.ProposalLab;
+import com.mobilecomputing.sahayak.JavaClasses.UserClass;
+import com.mobilecomputing.sahayak.JavaClasses.UserClassDBHelper;
 import com.mobilecomputing.sahayak.R;
 
 import java.util.ArrayList;
@@ -45,6 +48,7 @@ public class MentorOptionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mentor_options);
 
+        UserClass u= UserClassDBHelper.get(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         final Spinner spinner = (Spinner) findViewById(R.id.MentorOptionCategory);
         List<String> categories = new ArrayList<String>();
         categories.add("Language");
@@ -199,13 +203,14 @@ public class MentorOptionsActivity extends AppCompatActivity {
                 {
                     Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_LONG).show();
                 }
-                else if(startCalendar.compareTo(hourLaterCalendar) < 0)
-                {
-                    Toast.makeText(getApplicationContext(), "Start time must be at least one hour from now", Toast.LENGTH_LONG).show();
-                }
+//                else if(startCalendar.compareTo(hourLaterCalendar) < 0)
+//                {
+//                    Toast.makeText(getApplicationContext(), "Start time must be at least one hour from now", Toast.LENGTH_LONG).show();
+//                }
                 else
                 {
                     Proposal proposal = new Proposal(category, skill, startDate, duration, durationCap);
+                    proposal.setRating(u.getRating());
                     proposalLab.AddProposal(proposal);
                     Toast.makeText(getApplicationContext(), "Succesfully added", Toast.LENGTH_LONG).show();
                 }

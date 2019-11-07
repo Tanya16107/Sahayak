@@ -36,12 +36,12 @@ import java.util.Random;
 
 public class UserDashboard extends AppCompatActivity {
     private String url;
+    String mentorEmail="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dashboard);
         Bundle extras = getIntent().getExtras();
-        String mentorEmail="";
         if(extras == null) {
             mentorEmail = "";
         } else {
@@ -56,8 +56,7 @@ public class UserDashboard extends AppCompatActivity {
         Button btn_view_go_to_current_meeting = (Button) findViewById(R.id.current_meeting_btn);
 
         ProposalLab.get(this);
-        String em=FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        UserClass u=UserClassDBHelper.get(em);
+        UserClassDBHelper.get(email);
 
 //        Random random= new Random();
 //        int r=random.nextInt(6);
@@ -125,7 +124,8 @@ public class UserDashboard extends AppCompatActivity {
                     .onRatingChanged(new RatingDialog.Builder.RatingDialogListener() {
                         @Override
                         public void onRatingSelected(float rating, boolean thresholdCleared) {
-                            Toast.makeText(getApplicationContext(), Float.toString(rating), Toast.LENGTH_LONG).show();
+                            UserClassDBHelper.updateUser(mentorEmail,(int)rating);
+                            Toast.makeText(getApplicationContext(), "You Rated: "+Float.toString(rating), Toast.LENGTH_LONG).show();
                         }
                     }).build();
 
