@@ -36,6 +36,7 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import com.codemybrainsout.ratingdialog.RatingDialog;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mobilecomputing.sahayak.R;
@@ -75,6 +76,7 @@ public class SessionActivity extends AppCompatActivity {
     private Session session;
     private CustomHttpClient httpClient;
     private String sessionId;
+    private String studentString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +94,7 @@ public class SessionActivity extends AppCompatActivity {
         } else {
             newString= extras.getString("Meeting ID");
             urlString=extras.getString("URL");
-
+            studentString=extras.getString("Student");
         }
         sessionId = newString;
         OPENVIDU_URL=urlString;
@@ -243,31 +245,43 @@ public class SessionActivity extends AppCompatActivity {
     }
 
     public void viewToDisconnectedState() {
-        runOnUiThread(() -> {
-            localVideoView.clearImage();
-            localVideoView.release();
-            start_finish_call.setText(getResources().getString(R.string.start_button));
-            start_finish_call.setEnabled(true);
-            participant_name.setEnabled(true);
-            participant_name.setFocusableInTouchMode(true);
-            main_participant.setText(null);
-            main_participant.setPadding(0, 0, 0, 0);
-        });
+        try {
+            runOnUiThread(() -> {
+                localVideoView.clearImage();
+                localVideoView.release();
+                start_finish_call.setText(getResources().getString(R.string.start_button));
+                start_finish_call.setEnabled(true);
+                participant_name.setEnabled(true);
+                participant_name.setFocusableInTouchMode(true);
+                main_participant.setText(null);
+                main_participant.setPadding(0, 0, 0, 0);
+            });
+        }catch (Exception E){
+            Log.d(TAG, "viewToDisconnectedState: ");
+        }
     }
 
     public void viewToConnectingState() {
-        runOnUiThread(() -> {
-            start_finish_call.setEnabled(false);
-            participant_name.setEnabled(false);
-            participant_name.setFocusable(false);
-        });
+        try {
+            runOnUiThread(() -> {
+                start_finish_call.setEnabled(false);
+                participant_name.setEnabled(false);
+                participant_name.setFocusable(false);
+            });
+        }catch (Exception E){
+            Log.d(TAG, "viewToConnectingState: ");
+        }
     }
 
     public void viewToConnectedState() {
-        runOnUiThread(() -> {
-            start_finish_call.setText(getResources().getString(R.string.hang_up));
-            start_finish_call.setEnabled(true);
-        });
+        try {
+            runOnUiThread(() -> {
+                start_finish_call.setText(getResources().getString(R.string.hang_up));
+                start_finish_call.setEnabled(true);
+            });
+        }catch (Exception E){
+            Log.d(TAG, "viewToConnectedState: ");
+        }
     }
 
     public void createRemoteParticipantVideo(final RemoteParticipant remoteParticipant) {
@@ -305,6 +319,9 @@ public class SessionActivity extends AppCompatActivity {
     }
 
     public void leaveSession() {
+        Intent intent = new Intent(this, UserDashboard.class);
+        intent.putExtra("Mentor Email",studentString);
+        startActivity(intent);
         this.session.leaveSession();
         this.httpClient.dispose();
         viewToDisconnectedState();

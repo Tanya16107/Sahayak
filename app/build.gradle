@@ -63,6 +63,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.2.0'
     implementation 'com.neovisionaries:nv-websocket-client:2.9'
     implementation 'org.webrtc:google-webrtc:1.0.28513'
+    implementation 'com.codemybrainsout.rating:ratingdialog:1.0.8'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
 
 }
