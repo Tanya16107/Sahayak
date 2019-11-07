@@ -24,11 +24,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.mobilecomputing.sahayak.JavaClasses.ProposalLab;
 import com.mobilecomputing.sahayak.JavaClasses.Session;
 import com.mobilecomputing.sahayak.JavaClasses.SessionLab;
+import com.mobilecomputing.sahayak.JavaClasses.UserClass;
+import com.mobilecomputing.sahayak.JavaClasses.UserClassDBHelper;
 import com.mobilecomputing.sahayak.R;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class UserDashboard extends AppCompatActivity {
     private String url;
@@ -42,7 +45,17 @@ public class UserDashboard extends AppCompatActivity {
         Button btn_view_teacher_meetings = (Button) findViewById(R.id.teacher_meeting_btn);
         Button btn_view_student_meetings = (Button) findViewById(R.id.student_meeting_btn);
         Button btn_view_go_to_current_meeting = (Button) findViewById(R.id.current_meeting_btn);
+
         ProposalLab.get(this);
+        String em=FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        UserClass u=UserClassDBHelper.get(em);
+
+        Random random= new Random();
+        int r=random.nextInt(6);
+//        u.updateRating(r);
+        Log.d("MUI_branch","Before Update:"+r+" "+u.getRating()+" "+u.getTotalSessions());
+        UserClassDBHelper.updateUser(em,r);
+
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("URL");
         ref.addValueEventListener(new ValueEventListener() {
