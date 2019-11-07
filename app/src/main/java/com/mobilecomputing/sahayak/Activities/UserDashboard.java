@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.MenuItemCompat;
 
+import com.codemybrainsout.ratingdialog.RatingDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +40,15 @@ public class UserDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dashboard);
-
+        Bundle extras = getIntent().getExtras();
+        String mentorEmail="";
+        if(extras == null) {
+            mentorEmail = "";
+        } else {
+            mentorEmail = extras.getString("Mentor Email");
+        }
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String email = currentUser.getEmail();
         CardView btn_learn_something = (CardView) findViewById(R.id.learn_something);
         CardView btn_teach_something = (CardView) findViewById(R.id.teach_something);
         Button btn_view_teacher_meetings = (Button) findViewById(R.id.teacher_meeting_btn);
@@ -98,25 +107,48 @@ public class UserDashboard extends AppCompatActivity {
                 startActivity(student_dashboard_intent);
             }
         });
+        if(!email.equals(mentorEmail) && !mentorEmail.equals("")) {
+            final RatingDialog ratingDialog = new RatingDialog.Builder(this)
+                    .title("How would you rate the mentor?")
+                    .onThresholdCleared(new RatingDialog.Builder.RatingThresholdClearedListener() {
+                        @Override
+                        public void onThresholdCleared(RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
+                            //do something
+                            ratingDialog.dismiss();
+                        }
+                    })
+                    .onRatingBarFormSumbit(new RatingDialog.Builder.RatingDialogFormListener() {
+                        @Override
+                        public void onFormSubmitted(String feedback) {
+                        }
+                    })
+                    .onRatingChanged(new RatingDialog.Builder.RatingDialogListener() {
+                        @Override
+                        public void onRatingSelected(float rating, boolean thresholdCleared) {
+                            Toast.makeText(getApplicationContext(), Float.toString(rating), Toast.LENGTH_LONG).show();
+                        }
+                    }).build();
 
+            ratingDialog.show();
+        }
         btn_view_go_to_current_meeting.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                String email = currentUser.getEmail();
                 SessionLab sl = SessionLab.get(view.getContext());
                 List<Session> sessions = sl.getSessions();
                 int flag = 0;
                 String callID = "";
                 Date current = new Date();
+                String studentFlag = "";
                 for(int i=0;i<sessions.size();i++){
                     Date scheduled = sessions.get(i).getInteractionDate();
                     //Log.d("69969", "onClick: "+sessions.get(i).getStudent()+sessions.get(i).getTeacher()+scheduled);
                     if(sessions.get(i).getTeacher().equals(email) || sessions.get(i).getStudent().equals(email)){
                         //Log.d("69969", "onClick: "+(scheduled.getTime()-current.getTime()));
-                        if(scheduled.getTime()-current.getTime()<=300000 && current.getTime()-scheduled.getTime()<=sessions.get(i).getDuration()*60000){
+                        if(scheduled.getTime()-current.getTime()<=600000 && current.getTime()-scheduled.getTime()<=sessions.get(i).getDuration()*60000){
                             flag=1;
                             callID=sessions.get(i).getCloudID();
+                            studentFlag = sessions.get(i).getTeacher();
                             break;
                         }
                     }
@@ -128,6 +160,7 @@ public class UserDashboard extends AppCompatActivity {
                     Intent intent = new Intent(view.getContext(),SessionActivity.class);
                     intent.putExtra("Meeting ID",callID);
                     intent.putExtra("URL",url);
+                    intent.putExtra("Student",studentFlag);
                     //Toast.makeText(getApplicationContext(),"Redirecting to "+callID,Toast.LENGTH_LONG).show();
                     startActivity(intent);
                 }
