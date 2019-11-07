@@ -187,7 +187,7 @@ public class MentorOptionsActivity extends AppCompatActivity {
                 Calendar startCalendar = Calendar.getInstance();
                 startCalendar.set(mYear, mMonth, mDayOfMonth, mHourOfDay, mMinute);
                 Calendar hourLaterCalendar = Calendar.getInstance();
-                hourLaterCalendar.add(Calendar.HOUR_OF_DAY, 1);
+                //hourLaterCalendar.add(Calendar.HOUR_OF_DAY, 1);
 
                 String category = spinner.getSelectedItem().toString();
                 String skill = skillsMentor.getText().toString();
@@ -199,10 +199,10 @@ public class MentorOptionsActivity extends AppCompatActivity {
                 {
                     Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_LONG).show();
                 }
-//                else if(startCalendar.compareTo(hourLaterCalendar) < 0)
-//                {
-//                    Toast.makeText(getApplicationContext(), "Start time must be at least one hour from now", Toast.LENGTH_LONG).show();
-//                }
+                else if(startCalendar.compareTo(hourLaterCalendar) < 0)
+                {
+                    Toast.makeText(getApplicationContext(), "Start time must be at least one hour from now", Toast.LENGTH_LONG).show();
+                }
                 else
                 {
                     Proposal proposal = new Proposal(category, skill, startDate, duration, durationCap);
