@@ -53,12 +53,12 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         teacher.setText(sTeacher);
         student.setText(sStudent);
-        if(email.equals(sTeacher)){
-            student.setVisibility(View.VISIBLE);
-        }
-        else{
-            teacher.setVisibility(View.VISIBLE);
-        }
+//        if(email.equals(sTeacher)){
+//            student.setVisibility(View.VISIBLE);
+//        }
+//        else{
+//            teacher.setVisibility(View.VISIBLE);
+//        }
         duration.setText(sDuration);
         date.setText(sDate);
         skill.setText(sSkill);
