@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mobilecomputing.sahayak.R;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
@@ -41,14 +43,22 @@ public class ViewHolder extends RecyclerView.ViewHolder {
                            String sDuration, String sSkill){
         //Views
 //        Log.d("Date received:", sDate);
-        TextView teacher = mView.findViewById(R.id.teacher);
+
         TextView student = mView.findViewById(R.id.student);
+        TextView teacher = mView.findViewById(R.id.teacher);
         TextView duration = mView.findViewById(R.id.duration);
         TextView date = mView.findViewById(R.id.interaction_date);
         TextView skill = mView.findViewById(R.id.skill);
 
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         teacher.setText(sTeacher);
         student.setText(sStudent);
+        if(email.equals(sTeacher)){
+            student.setVisibility(View.VISIBLE);
+        }
+        else{
+            teacher.setVisibility(View.VISIBLE);
+        }
         duration.setText(sDuration);
         date.setText(sDate);
         skill.setText(sSkill);
