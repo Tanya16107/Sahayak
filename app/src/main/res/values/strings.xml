@@ -37,4 +37,5 @@
     <string name="default_notification_channel_id">SahayakMainChannel</string>
     <string name="default_notification_channel_name">Sahayak</string>
     <string name="fcm_message">Sayahak Notification</string>
+    <string name="edit_proposal">Edit Proposal</string>
 </resources>

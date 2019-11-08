@@ -104,6 +104,10 @@ public class UserDashboard extends AppCompatActivity {
             startActivity(signOutIntent);
             finish();
         }
+        else if(id == R.id.action_edit_proposal){
+            Intent editProposalIntent = new Intent(this, EditProposalActivity.class);
+            startActivity(editProposalIntent);
+        }
         return super.onOptionsItemSelected(item);
     }
 }

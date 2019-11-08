@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.mobilecomputing.sahayak.Activities.MenteeOptionsActivity;
+import com.mobilecomputing.sahayak.JavaClasses.EditProposalLab;
 import com.mobilecomputing.sahayak.JavaClasses.Proposal;
 import com.mobilecomputing.sahayak.R;
 
@@ -18,19 +16,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.ProposalHolder> {
+import androidx.recyclerview.widget.RecyclerView;
 
+public class EditProposalAdapter extends RecyclerView.Adapter<EditProposalAdapter.ProposalHolder> {
     private List<Proposal> mProposals;
     private List<Proposal> store;
     private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private EditProposalAdapter.ItemClickListener mClickListener;
+    private Context context;
+    private EditProposalLab editProposalLab;
     final SimpleDateFormat dateFormat = new SimpleDateFormat("E, ");
 
-    public ProposalAdapter(Context context, List<Proposal> proposals) {
+    public EditProposalAdapter(Context context, List<Proposal> proposals,EditProposalLab editProposalLab) {
         this.mInflater = LayoutInflater.from(context);
         this.mProposals = proposals;
         store=new ArrayList<Proposal>();
         store.addAll(this.mProposals);
+        this.context =context;
+        this.editProposalLab = editProposalLab;
     }
 
     @Override
@@ -41,7 +44,7 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
 
     @Override
     public void onBindViewHolder(ProposalHolder holder, int position) {
-        Log.d("ProposalAdapter", "Type of mProposalElement " + mProposals.get(position).getSkill());
+        Log.d("EditProposalAdapter", "Type of mProposalElement " + mProposals.get(position).getSkill());
         Proposal proposal = mProposals.get(position);
         holder.bind(proposal);
     }
@@ -55,9 +58,16 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
         return mProposals.get(id);
     }
 
-    public void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(EditProposalAdapter.ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
+
+    public Context getContext() {
+        return context;
+    }
+
+
+
 
     public interface ItemClickListener {
         void onItemClick(View view, int position);
@@ -68,6 +78,7 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
 
         private Proposal mProposal;
 
+        private TextView mProposal_Rating;
         private TextView mProposal_Skill;
         private TextView mProposal_TimeWindow;
 
@@ -90,6 +101,18 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
+    }
+    public void removeProposal(Proposal proposal,int position){
+        editProposalLab.deleteProposalsIndex(proposal);
+        mProposals.remove(position);
+        notifyItemRemoved(position);
+
+    }
+    public void restoreItem(Proposal proposal, int position){
+        editProposalLab.AddProposal(proposal);
+        mProposals.add(position,proposal);
+        notifyItemInserted(position);
+
     }
 
     public void filter(String charText) {
