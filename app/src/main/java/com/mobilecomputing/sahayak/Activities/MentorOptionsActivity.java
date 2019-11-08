@@ -1,6 +1,7 @@
 package com.mobilecomputing.sahayak.Activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.mobilecomputing.sahayak.Fragments.proposalShowFragment;
 import com.mobilecomputing.sahayak.JavaClasses.CustomTimePickerDialog;
 import com.mobilecomputing.sahayak.JavaClasses.Proposal;
 import com.mobilecomputing.sahayak.JavaClasses.ProposalLab;
@@ -30,6 +32,8 @@ import java.util.List;
 
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MentorOptionsActivity extends AppCompatActivity {
 
@@ -53,9 +57,12 @@ public class MentorOptionsActivity extends AppCompatActivity {
         List<String> categories = new ArrayList<String>();
         categories.add("Language");
         categories.add("Science");
-        categories.add("Information Technology");
+        categories.add("Technology");
         categories.add("Sports");
         categories.add("Health");
+        categories.add("Music");
+        categories.add("Art");
+        categories.add("Other");
 
         final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         spinner.setAdapter(dataAdapter);
@@ -212,7 +219,18 @@ public class MentorOptionsActivity extends AppCompatActivity {
                     Proposal proposal = new Proposal(category, skill, startDate, duration, durationCap);
                     proposal.setRating(u.getRating());
                     proposalLab.AddProposal(proposal);
-                    Toast.makeText(getApplicationContext(), "Succesfully added", Toast.LENGTH_LONG).show();
+                    new SweetAlertDialog(view.getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                            .setTitleText("Session added successfully!")
+                            .setConfirmText("Okay")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    Intent intent = new Intent(view.getContext(), UserDashboard.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            })
+                            .show();
                 }
             }
         });

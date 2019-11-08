@@ -5,148 +5,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="#fff"
     app:cardCornerRadius="3dp"
-    app:cardElevation="3dp"
-    app:contentPadding="5dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="2dp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.83"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif"
-                android:text="Mentor: " />
-            <TextView
-                android:id="@+id/teacher"
-                android:text="Teacher"
-                android:layout_weight="0.17"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:layout_weight="0.83"
-                android:paddingTop="4dp"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif"
-                android:text="Mentee: " />
-
-            <TextView
-                android:id="@+id/student"
-                android:text="Student"
-                android:textSize="14sp"
-                android:layout_weight="0.17"
-                android:fontFamily="sans-serif"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:layout_weight="0.83"
-                android:paddingTop="4dp"
-                android:fontFamily="sans-serif"
-                android:text="Duration: " />
-
-            <TextView
-                android:id="@+id/duration"
-                android:text="Duration"
-                android:layout_weight="0.17"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:layout_weight="0.83"
-                android:textSize="14sp"
-                android:paddingTop="4dp"
-                android:fontFamily="sans-serif"
-                android:text="Date:" />
+            android:orientation="horizontal"
+            android:layout_margin="6dp">
 
             <TextView
                 android:id="@+id/interaction_date"
                 android:text="Date"
-                android:textSize="14sp"
-                android:layout_weight="0.17"
-                android:fontFamily="sans-serif"
-                android:layout_width="match_parent"
+                android:textSize="12dp"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:id="@+id/duration"
+                android:text="Duration"
+                android:textSize="12dp"
+                android:textColor="@color/colorAccent"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"/>
 
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/skill"
+            android:text="Skill"
+            android:textSize="16dp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto_bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:orientation="horizontal">
+            android:layout_margin="6dp"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:layout_weight="0.83"
-                android:textSize="14sp"
-                android:paddingTop="4dp"
-                android:fontFamily="sans-serif"
-                android:text="Skill:" />
-
-            <TextView
-                android:id="@+id/skill"
-                android:text="Skill"
-                android:textSize="14sp"
-                android:layout_weight="0.17"
-                android:fontFamily="sans-serif"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/student"
+            android:text="Student"
+            android:visibility="gone"
+            android:textSize="12dp"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"/>
+        <TextView
+            android:id="@+id/teacher"
+            android:text="Teacher"
+            android:visibility="gone"
+            android:textSize="12dp"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"/>
 
     </LinearLayout>
 

@@ -1,92 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     tools:context=".Activities.MentorOptionsActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <LinearLayout
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/categoryMentor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:text="Select Category" />
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clipToPadding="false">
 
             <Spinner
                 android:id="@+id/MentorOptionCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="16dp"
+                android:fontFamily="@font/roboto_regular"/>
 
 
-            <EditText
-                android:id="@+id/skillsMentor"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:textSize="16sp"
-                android:backgroundTint="@color/lightGrey"
-                android:layout_marginTop="8dp"
-                android:hint="Enter skills"
-                android:gravity="start|top"
-                android:inputType="textMultiLine" />
+                android:hint="Enter Skill"
+                android:layout_margin="16dp">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/skillsMentor"
+                    android:ems="10"
+                    android:textSize="16dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="32dp"/>
-
-            <!--    <Button-->
-            <!--        android:id="@+id/setDate"-->
-            <!--        android:layout_width="wrap_content"-->
-            <!--        android:layout_height="wrap_content"-->
-            <!--        android:layout_gravity="center"-->
-            <!--        android:text="Select Date" />-->
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:weightSum="1"
+                android:layout_margin="16dp">
 
-                <Button
-                    android:id="@+id/setDate"
-                    android:layout_width="140dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@drawable/ic_date_range_black_24dp"
-                    android:drawablePadding="8dp"
-                    android:text="Select Date" />
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <Button
+                        android:padding="8dp"
+                        android:layout_gravity="right"
+                        android:id="@+id/setDate"
+                        android:layout_margin="8dp"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/robotomedium"
+                        android:background="@drawable/button_background"
+                        android:textSize="15dp"
+                        android:text="Select Date"
+                        android:textAllCaps="false"/>
+                </LinearLayout>
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewDate"
-                    android:paddingLeft="16dp"
-                    android:text=""
-                    android:textSize="14sp" />
+                    android:text="Chosen Date"
+                    android:textSize="16dp"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/robotomedium"
+                    android:layout_weight="0.5"/>
 
             </LinearLayout>
 
@@ -95,75 +88,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:weightSum="1"
+                android:layout_margin="16dp">
 
-                <Button
-                    android:id="@+id/setTime"
-                    android:layout_width="140dp"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@drawable/ic_access_time_black_24dp"
-                    android:drawablePadding="8dp"
-                    android:text="Select Time" />
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <Button
+                        android:padding="8dp"
+                        android:layout_gravity="right"
+                        android:id="@+id/setTime"
+                        android:layout_margin="8dp"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_access_time_black_24dp"
+
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/robotomedium"
+                        android:background="@drawable/button_background"
+                        android:textAllCaps="false"
+                        android:textSize="15dp"
+                        android:text="Select Time"/>
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewTime"
-                    android:paddingLeft="16dp"
-                    android:text=""
-                    android:textSize="14sp" />
+                    android:text="Chosen time"
+                    android:layout_weight="0.5"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/robotomedium"
+                    android:textSize="16dp" />
 
             </LinearLayout>
-
-
-
-            <!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:gravity="center">-->
-<!--    -->
-<!--                <Button-->
-<!--                    android:id="@+id/setTime"-->
-<!--                    android:layout_width="140dp"-->
-<!--                    android:paddingLeft="8dp"-->
-<!--                    android:paddingRight="8dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:background="@color/colorPrimary"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:drawableLeft="@drawable/ic_access_time_black_24dp"-->
-<!--                    android:drawablePadding="8dp"-->
-<!--                    android:text="Select Time" />-->
-<!--    -->
-<!--                <TextView-->
-<!--                    android:id="@+id/textViewTime"-->
-<!--                    android:paddingLeft="16dp"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:text="17:00" />-->
-<!--    -->
-<!--            </LinearLayout>-->
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="32dp"
+                android:layout_margin="8dp"
                 android:text="Select Total Session Time" />
-
-            <!--        <Spinner-->
-            <!--            android:id="@+id/selectMinutes"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            />-->
 
             <TextView
                 android:id="@+id/textViewSessionTime"
@@ -182,13 +151,9 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="32dp"
+                android:layout_margin="8dp"
+                android:layout_marginTop="16dp"
                 android:text="Select Time Cap"/>
-
-            <!--        <Spinner-->
-            <!--            android:id="@+id/selectMinutes2"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="wrap_content" />-->
 
             <TextView
                 android:id="@+id/textViewTimeCap"
@@ -201,26 +166,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/textView"
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="60dp" />
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
             <Button
+                android:padding="8dp"
                 android:id="@+id/addButton"
+                android:layout_margin="16dp"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
                 android:drawableLeft="@drawable/ic_add_circle_outline_black_24dp"
-                android:paddingLeft="8dp"
-                android:layout_marginBottom="16dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:text="Add" />
+                android:fontFamily="@font/robotomedium"
+                android:background="@drawable/button_background"
+                android:textSize="15dp"
+                android:text="Add"/>
 
         </LinearLayout>
 
-    </ScrollView>
 
-</LinearLayout>
+</ScrollView>

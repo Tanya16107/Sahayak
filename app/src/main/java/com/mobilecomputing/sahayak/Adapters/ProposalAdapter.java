@@ -13,6 +13,7 @@ import com.mobilecomputing.sahayak.Activities.MenteeOptionsActivity;
 import com.mobilecomputing.sahayak.JavaClasses.Proposal;
 import com.mobilecomputing.sahayak.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -23,6 +24,7 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
     private List<Proposal> store;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    final SimpleDateFormat dateFormat = new SimpleDateFormat("E, ");
 
     public ProposalAdapter(Context context, List<Proposal> proposals) {
         this.mInflater = LayoutInflater.from(context);
@@ -66,7 +68,6 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
 
         private Proposal mProposal;
 
-        private TextView mProposal_Rating;
         private TextView mProposal_Skill;
         private TextView mProposal_TimeWindow;
 
@@ -74,16 +75,15 @@ public class ProposalAdapter extends RecyclerView.Adapter<ProposalAdapter.Propos
             super(itemview);
             itemView.setOnClickListener(this);
 
-            mProposal_Rating = (TextView) itemView.findViewById(R.id.proposal_rating);
             mProposal_Skill = (TextView) itemView.findViewById(R.id.proposal_skill);
             mProposal_TimeWindow = (TextView) itemview.findViewById(R.id.proposal_time_window);
         }
 
         public void bind(Proposal proposal) {
             mProposal = proposal;
-            mProposal_Rating.setText("Instructor Rating: " + mProposal.getRating());
             mProposal_Skill.setText(mProposal.getSkill());
-            mProposal_TimeWindow.setText("Time Window: " + mProposal.getTimeWindow());
+            String[] splitWindow = mProposal.getTimeWindow().split("-");
+            mProposal_TimeWindow.setText(dateFormat.format(mProposal.getStartDate()) + splitWindow[0]+" - "+splitWindow[1]);
         }
 
         @Override
