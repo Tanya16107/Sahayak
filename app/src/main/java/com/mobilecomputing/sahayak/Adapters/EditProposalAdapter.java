@@ -101,13 +101,16 @@ public class EditProposalAdapter extends RecyclerView.Adapter<EditProposalAdapte
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
     }
-    public void removeProposal(int position){
-        Proposal proposal=mProposals.remove(position);
+    public void removeProposal(Proposal proposal,int position){
         editProposalLab.deleteProposalsIndex(proposal);
+        mProposals.remove(position);
+        notifyItemRemoved(position);
+
     }
-    public void restoreItem(Proposal proposal, int index){
-        mProposals.add(index,proposal);
+    public void restoreItem(Proposal proposal, int position){
         editProposalLab.AddProposal(proposal);
+        mProposals.add(position,proposal);
+        notifyItemInserted(position);
 
     }
 

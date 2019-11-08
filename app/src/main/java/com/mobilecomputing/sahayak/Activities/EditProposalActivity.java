@@ -64,10 +64,10 @@ public class EditProposalActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
 
-                final int position = viewHolder.getAdapterPosition();
-                final Proposal item = mAdapter.getItem(position);
+                int position = viewHolder.getAdapterPosition();
+                Proposal item = mAdapter.getItem(position);
                 Log.d(TAG,"Delete Position" + Integer.toString(position));
-                mAdapter.removeProposal(position);
+                mAdapter.removeProposal(item,position);
 
 
                 Snackbar snackbar = Snackbar
@@ -77,7 +77,6 @@ public class EditProposalActivity extends AppCompatActivity {
                     public void onClick(View view) {
 
                         mAdapter.restoreItem(item, position);
-                        mentorProposalView.scrollToPosition(position);
                     }
                 });
 

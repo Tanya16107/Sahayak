@@ -44,7 +44,7 @@ public class ProposalLab {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                         Proposal p = ds.getValue(Proposal.class);
-                        Log.d(TAG,p.getMentorName()+"----"+ currentUser.getEmail());
+//                        Log.d(TAG,p.getMentorName()+"----"+ currentUser.getEmail());
                         if(!p.getMentorName().equals(currentUser.getEmail())){
                             mProposals.add(p);
                         }
@@ -86,7 +86,7 @@ public class ProposalLab {
                     Calendar endCalendar = Calendar.getInstance();
                     endCalendar.setTime(proposal.getStartDate());
                     endCalendar.add(Calendar.MINUTE, proposal.getDuration());
-                    Log.d(TAG,new Date().toString()+ " -----"+ endCalendar.getTime());
+//                    Log.d(TAG,new Date().toString()+ " -----"+ endCalendar.getTime());
                     if(endCalendar.getTime().before(new Date())){
                         Log.d(TAG,"before");
                         proposalSnapshot.getRef().removeValue();

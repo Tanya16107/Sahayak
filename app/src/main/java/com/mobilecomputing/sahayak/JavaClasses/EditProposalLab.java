@@ -23,7 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static com.mobilecomputing.sahayak.Fragments.proposalShowFragment.TAG;
+
 
 
 public class EditProposalLab {
@@ -33,6 +33,7 @@ public class EditProposalLab {
     private ProgressBar progressBar;
     DatabaseReference mRef;
     FirebaseDatabase mFirebaseDatabase;
+    public static String TAG = "EditProposalLab";
 
     private EditProposalLab(final Context context) {
         mDatabase = FirebaseDatabase.getInstance().getReference("active_proposals");
@@ -44,7 +45,6 @@ public class EditProposalLab {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                         Proposal p = ds.getValue(Proposal.class);
-                        Log.d(TAG,p.getMentorName()+"----"+ currentUser.getEmail());
                         if(p.getMentorName().equals(currentUser.getEmail())){
                             mProposals.add(p);
                         }
@@ -76,30 +76,7 @@ public class EditProposalLab {
         // TODO: Handle Duplicates
         dref.setValue(proposal);
     }
-    public void deleteProposals(){
-        mDatabase = FirebaseDatabase.getInstance().getReference("active_proposals");
-        mDatabase.orderByChild("startDate").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot proposalSnapshot: dataSnapshot.getChildren()) {
-                    Proposal proposal=proposalSnapshot.getValue(Proposal.class);
-                    Calendar endCalendar = Calendar.getInstance();
-                    endCalendar.setTime(proposal.getStartDate());
-                    endCalendar.add(Calendar.MINUTE, proposal.getDuration());
-                    Log.d(TAG,new Date().toString()+ " -----"+ endCalendar.getTime());
-                    if(endCalendar.getTime().before(new Date())){
-                        Log.d(TAG,"before");
-                        proposalSnapshot.getRef().removeValue();
-                    }
-                }
-            } @Override
-            public void onCancelled(DatabaseError databaseError) {
 
-            }
-
-        });
-
-    }
     public void deleteProposalsIndex(Proposal proposalDelete){
         mDatabase = FirebaseDatabase.getInstance().getReference("active_proposals");
         mDatabase.orderByChild("startDate").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -107,8 +84,8 @@ public class EditProposalLab {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot proposalSnapshot: dataSnapshot.getChildren()) {
                     Proposal proposal=proposalSnapshot.getValue(Proposal.class);
-                    Log.d(TAG,proposal.getMentorName()+"-------"+ proposalDelete.getMentorName());
-                    if(proposalDelete.equals(proposal)){
+                    Log.d(TAG,proposal.getCloudID()+"-------"+ proposalDelete.getCloudID());
+                    if(proposalDelete.getCloudID().equals(proposal.getCloudID())){
                         Log.d(TAG,"delete");
                         proposalSnapshot.getRef().removeValue();
                     }
@@ -123,7 +100,6 @@ public class EditProposalLab {
     }
     public List<Proposal> getProposals() {
         Log.d("EditProposalLab", "Getting " + mProposals.size() + " Proposals " + mProposals.getClass().getSimpleName());
-        this.deleteProposals();
         return mProposals;
     }
 
