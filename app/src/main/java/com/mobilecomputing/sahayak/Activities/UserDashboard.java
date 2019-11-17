@@ -58,6 +58,8 @@ public class UserDashboard extends AppCompatActivity {
             mentorEmail = extras.getString("Mentor Email");
         }
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("firebase user fetch", currentUser.getEmail());
+        Log.d("firebase user fetch", currentUser.getUid());
         String email = currentUser.getEmail();
         UserClassDBHelper.get(email);
         models = new ArrayList<>();
@@ -86,6 +88,32 @@ public class UserDashboard extends AppCompatActivity {
 
             }
         });
+
+        if(mentorEmail!=null && !email.equals(mentorEmail) && !mentorEmail.equals("")) {
+            final RatingDialog ratingDialog = new RatingDialog.Builder(this)
+                    .title("How would you rate the mentor?")
+                    .onThresholdCleared(new RatingDialog.Builder.RatingThresholdClearedListener() {
+                        @Override
+                        public void onThresholdCleared(RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
+                            //do something
+                            ratingDialog.dismiss();
+                        }
+                    })
+                    .onRatingBarFormSumbit(new RatingDialog.Builder.RatingDialogFormListener() {
+                        @Override
+                        public void onFormSubmitted(String feedback) {
+                        }
+                    })
+                    .onRatingChanged(new RatingDialog.Builder.RatingDialogListener() {
+                        @Override
+                        public void onRatingSelected(float rating, boolean thresholdCleared) {
+                            Toast.makeText(getApplicationContext(), Float.toString(rating), Toast.LENGTH_LONG).show();
+                        }
+                    }).build();
+
+
+            ratingDialog.show();
+        }
     }
 
     @Override
