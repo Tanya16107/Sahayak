@@ -2,6 +2,7 @@ package com.mobilecomputing.sahayak.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,6 +115,7 @@ public class DashboardAdapter extends PagerAdapter {
                else if(titleJunk.equals("Upcoming Meetings")){
                     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                     String email = currentUser.getEmail();
+                    String studentFlag = "";
                     SessionLab sl = SessionLab.get(view.getContext());
                     List<Session> sessions = sl.getSessions();
                     int flag = 0;
@@ -124,9 +126,10 @@ public class DashboardAdapter extends PagerAdapter {
                         //Log.d("69969", "onClick: "+sessions.get(i).getStudent()+sessions.get(i).getTeacher()+scheduled);
                         if(sessions.get(i).getTeacher().equals(email) || sessions.get(i).getStudent().equals(email)){
                             //Log.d("69969", "onClick: "+(scheduled.getTime()-current.getTime()));
-                            if(scheduled.getTime()-current.getTime()<=300000 && current.getTime()-scheduled.getTime()<=900000){
+                            if(scheduled.getTime()-current.getTime()<=600000 && current.getTime()-scheduled.getTime()<=sessions.get(i).getDuration()*60000){
                                 flag=1;
                                 callID=sessions.get(i).getCloudID();
+                                studentFlag = sessions.get(i).getTeacher();
                                 break;
                             }
                         }
@@ -138,6 +141,7 @@ public class DashboardAdapter extends PagerAdapter {
                         Intent intent = new Intent(context,SessionActivity.class);
                         intent.putExtra("Meeting ID",callID);
                         intent.putExtra("URL",url);
+                        intent.putExtra("Student",studentFlag);
                         //Toast.makeText(getApplicationContext(),"Redirecting to "+callID,Toast.LENGTH_LONG).show();
                         context.startActivity(intent);
                     }
