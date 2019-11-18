@@ -51,8 +51,8 @@ public class EditProposalActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Proposal p = mAdapter.getItem(position);
-                Intent intent = new Intent(EditProposalActivity.this, IndividualProposalActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(EditProposalActivity.this, IndividualProposalActivity.class);
+//                startActivity(intent);
             }
         });
         mentorProposalView.setAdapter(mAdapter);
