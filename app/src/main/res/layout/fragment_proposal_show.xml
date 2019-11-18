@@ -3,43 +3,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.proposalShowFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-    <TextView
-        android:id="@+id/proposal_skill"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        />
+        android:orientation="vertical"
+        android:clipToPadding="false">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="40dp"
+            android:layout_marginTop="-30dp">
+            <ImageView
+                android:id="@+id/img_propShow"
+                android:layout_width="match_parent"
+                android:layout_height="330dp"
+                android:src="@drawable/bg_others"/>
+            </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="16dp"
+            android:clipToPadding="false">
+            <TextView
+                android:id="@+id/proposal_skill"
+                android:text="Skill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:textSize="32dp"
+                android:fontFamily="@font/roboto_black"
+                android:textColor="@android:color/black"/>
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:numStars="5"
+                android:scaleX=".5"
+                android:scaleY=".5"
+                android:stepSize="0.1"
+                android:transformPivotX="0dp"
+                android:transformPivotY="0dp"
+                android:isIndicator="true"/>
+
 
     <TextView
-        android:id="@+id/proposal_rating"
-        android:padding="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-    <TextView
-        android:id="@+id/proposal_description"
-        android:padding="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
-    <TextView
-        android:id="@+id/time_window"
-        android:paddingTop="15dp"
+        android:text="Choose time slot"
         android:paddingLeft="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:text="Enter Time Slot"
+        android:fontFamily="@font/robotomedium"
+        android:textSize="16dp"
         />
     <LinearLayout
         android:id="@+id/sessionsList"
@@ -49,16 +67,19 @@
         android:padding="15dp">
     </LinearLayout>
 
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_background"
-        android:layout_margin="15dp"
-        android:text="Submit"
-        android:textAllCaps="false"
-        android:textColor="@color/white" />
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:layout_margin="8dp"
+            android:text="Submit"
+            android:fontFamily="@font/robotomedium"
+            android:textSize="15dp"
+            android:background="@drawable/button_background"
+            android:textColor="@color/white"
+            android:textAllCaps="false"/>
     </LinearLayout>
+    </LinearLayout>
+
 </ScrollView>

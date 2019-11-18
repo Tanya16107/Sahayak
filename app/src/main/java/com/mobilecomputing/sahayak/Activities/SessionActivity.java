@@ -36,6 +36,7 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import com.codemybrainsout.ratingdialog.RatingDialog;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mobilecomputing.sahayak.R;
@@ -61,14 +62,8 @@ public class SessionActivity extends AppCompatActivity {
     LinearLayout views_container;
     @BindView(R.id.start_finish_call)
     Button start_finish_call;
-    @BindView(R.id.session_name)
-    EditText session_name;
     @BindView(R.id.participant_name)
     EditText participant_name;
-    @BindView(R.id.openvidu_url)
-    EditText openvidu_url;
-    @BindView(R.id.openvidu_secret)
-    EditText openvidu_secret;
     @BindView(R.id.local_gl_surface_view)
     SurfaceViewRenderer localVideoView;
     @BindView(R.id.main_participant)
@@ -81,6 +76,7 @@ public class SessionActivity extends AppCompatActivity {
     private Session session;
     private CustomHttpClient httpClient;
     private String sessionId;
+    private String studentString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +94,7 @@ public class SessionActivity extends AppCompatActivity {
         } else {
             newString= extras.getString("Meeting ID");
             urlString=extras.getString("URL");
-
+            studentString=extras.getString("Student");
         }
         sessionId = newString;
         OPENVIDU_URL=urlString;
@@ -108,14 +104,6 @@ public class SessionActivity extends AppCompatActivity {
         Random random = new Random();
         int randomIndex = random.nextInt(100);
         participant_name.setText(participant_name.getText().append(String.valueOf(randomIndex)));
-        Button goBackbtn = findViewById(R.id.back_button);
-        goBackbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),UserDashboard.class);
-                startActivity(intent);
-            }
-        });
     }
 
     public void askForPermissions() {
@@ -149,7 +137,7 @@ public class SessionActivity extends AppCompatActivity {
             initViews();
             viewToConnectingState();
 
-            OPENVIDU_SECRET = openvidu_secret.getText().toString();
+            OPENVIDU_SECRET = "MY_SECRET";
             httpClient = new CustomHttpClient(OPENVIDU_URL, "Basic " + android.util.Base64.encodeToString(("OPENVIDUAPP:" + OPENVIDU_SECRET).getBytes(), android.util.Base64.DEFAULT).trim());
 
             //final String sessionId = session_name.getText().toString();
@@ -257,43 +245,43 @@ public class SessionActivity extends AppCompatActivity {
     }
 
     public void viewToDisconnectedState() {
-        runOnUiThread(() -> {
-            localVideoView.clearImage();
-            localVideoView.release();
-            start_finish_call.setText(getResources().getString(R.string.start_button));
-            start_finish_call.setEnabled(true);
-            openvidu_url.setEnabled(true);
-            openvidu_url.setFocusableInTouchMode(true);
-            openvidu_secret.setEnabled(true);
-            openvidu_secret.setFocusableInTouchMode(true);
-            session_name.setEnabled(true);
-            session_name.setFocusableInTouchMode(true);
-            participant_name.setEnabled(true);
-            participant_name.setFocusableInTouchMode(true);
-            main_participant.setText(null);
-            main_participant.setPadding(0, 0, 0, 0);
-        });
+        try {
+            runOnUiThread(() -> {
+                localVideoView.clearImage();
+                localVideoView.release();
+                start_finish_call.setText(getResources().getString(R.string.start_button));
+                start_finish_call.setEnabled(true);
+                participant_name.setEnabled(true);
+                participant_name.setFocusableInTouchMode(true);
+                main_participant.setText(null);
+                main_participant.setPadding(0, 0, 0, 0);
+            });
+        }catch (Exception E){
+            Log.d(TAG, "viewToDisconnectedState: ");
+        }
     }
 
     public void viewToConnectingState() {
-        runOnUiThread(() -> {
-            start_finish_call.setEnabled(false);
-            openvidu_url.setEnabled(false);
-            openvidu_url.setFocusable(false);
-            openvidu_secret.setEnabled(false);
-            openvidu_secret.setFocusable(false);
-            session_name.setEnabled(false);
-            session_name.setFocusable(false);
-            participant_name.setEnabled(false);
-            participant_name.setFocusable(false);
-        });
+        try {
+            runOnUiThread(() -> {
+                start_finish_call.setEnabled(false);
+                participant_name.setEnabled(false);
+                participant_name.setFocusable(false);
+            });
+        }catch (Exception E){
+            Log.d(TAG, "viewToConnectingState: ");
+        }
     }
 
     public void viewToConnectedState() {
-        runOnUiThread(() -> {
-            start_finish_call.setText(getResources().getString(R.string.hang_up));
-            start_finish_call.setEnabled(true);
-        });
+        try {
+            runOnUiThread(() -> {
+                start_finish_call.setText(getResources().getString(R.string.hang_up));
+                start_finish_call.setEnabled(true);
+            });
+        }catch (Exception E){
+            Log.d(TAG, "viewToConnectedState: ");
+        }
     }
 
     public void createRemoteParticipantVideo(final RemoteParticipant remoteParticipant) {
@@ -331,6 +319,9 @@ public class SessionActivity extends AppCompatActivity {
     }
 
     public void leaveSession() {
+        Intent intent = new Intent(this, UserDashboard.class);
+        intent.putExtra("Mentor Email",studentString);
+        startActivity(intent);
         this.session.leaveSession();
         this.httpClient.dispose();
         viewToDisconnectedState();
@@ -343,19 +334,31 @@ public class SessionActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        leaveSession();
+        if (start_finish_call.getText().equals(getResources().getString(R.string.hang_up))) {
+            // Already connected to a session
+            leaveSession();
+        }
+        finish();
         super.onDestroy();
     }
 
     @Override
     public void onBackPressed() {
-        leaveSession();
+        if (start_finish_call.getText().equals(getResources().getString(R.string.hang_up))) {
+            // Already connected to a session
+            leaveSession();
+        }
+        finish();
         super.onBackPressed();
     }
 
     @Override
     protected void onStop() {
-        leaveSession();
+        if (start_finish_call.getText().equals(getResources().getString(R.string.hang_up))) {
+            // Already connected to a session
+            leaveSession();
+        }
+        finish();
         super.onStop();
     }
 

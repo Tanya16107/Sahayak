@@ -26,6 +26,8 @@ import com.mobilecomputing.sahayak.R;
 import java.io.ByteArrayOutputStream;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MentorMeetings extends AppCompatActivity {
 
@@ -34,7 +36,8 @@ public class MentorMeetings extends AppCompatActivity {
     RecyclerView mRecyclerView;
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference mRef;
-    Format formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    Format formatter = new SimpleDateFormat("EEEE, MMM d");
+    SimpleDateFormat formatterDuration = new SimpleDateFormat("h:mm a");
     String date_string;
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
@@ -81,9 +84,16 @@ public class MentorMeetings extends AppCompatActivity {
                 ) {
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, Session session, int position) {
+                        Date start = session.getInteractionDate();
+                        Calendar startCalendar = Calendar.getInstance();
+                        startCalendar.setTime(start);
+                        startCalendar.add(Calendar.MINUTE, session.getDuration());
+                        Date end = startCalendar.getTime();
+
+                        String duration = formatterDuration.format(start)+" - "+formatterDuration.format(end);
+
                         viewHolder.setDetails(getApplicationContext(), session.getTeacher(), session.getStudent(),
-                                formatter.format(session.getInteractionDate()),
-                                Integer.toString(session.getDuration()), session.getSkill()
+                                formatter.format(start), duration, session.getSkill()
                         );
                     }
 
@@ -127,9 +137,17 @@ public class MentorMeetings extends AppCompatActivity {
                 ) {
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, Session session, int position) {
-                            viewHolder.setDetails(getApplicationContext(), session.getTeacher(), session.getStudent(),
-                                    formatter.format(session.getInteractionDate()),
-                                    Integer.toString(session.getDuration()), session.getSkill());
+                        Date start = session.getInteractionDate();
+                        Calendar startCalendar = Calendar.getInstance();
+                        startCalendar.setTime(start);
+                        startCalendar.add(Calendar.MINUTE, session.getDuration());
+                        Date end = startCalendar.getTime();
+
+                        String duration = formatterDuration.format(start)+" - "+formatterDuration.format(end);
+
+                        viewHolder.setDetails(getApplicationContext(), session.getTeacher(), session.getStudent(),
+                                formatter.format(start), duration, session.getSkill()
+                        );
                     }
 
                     @Override

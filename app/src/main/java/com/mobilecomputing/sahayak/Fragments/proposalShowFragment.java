@@ -1,5 +1,6 @@
 package com.mobilecomputing.sahayak.Fragments;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -65,11 +68,34 @@ public class proposalShowFragment extends Fragment {
         String mSkill = mProposal.getSkill();
         mProposal_skill.setText(mSkill);
 
-        TextView mProposal_rating = (TextView) v.findViewById(R.id.proposal_rating);
-        mProposal_rating.setText("Instructor Rating: " + mProposal.getRating());
+        RatingBar rbar = (RatingBar) v.findViewById(R.id.ratingBar);
+        rbar.setRating(mProposal.getRating());
 
-        TextView mProposal_description = (TextView) v.findViewById(R.id.proposal_description);
-        mProposal_description.setText("Category: " + mProposal.getCategory());
+        String cat = mProposal.getCategory();
+        ImageView imview = (ImageView) v.findViewById(R.id.img_propShow);
+        if(cat.equals("Language")){
+            imview.setImageResource(R.drawable.bg_languages);
+        }
+        else if(cat.equals("Science")){
+            imview.setImageResource(R.drawable.bg_science);
+        }
+        else if(cat.equals("Technology")){
+            imview.setImageResource(R.drawable.bg_tech);
+        }
+        else if(cat.equals("Sports")){
+            imview.setImageResource(R.drawable.bg_sports);
+        }
+        else if(cat.equals("Health")){
+            imview.setImageResource(R.drawable.bg_health);
+        }
+        else if(cat.equals("Music")){
+            imview.setImageResource(R.drawable.bg_music);
+        }
+        else if(cat.equals("Art")){
+            imview.setImageResource(R.drawable.bg_art);
+        }
+
+
         //mProposal_description.setText("Description: " + mProposal.getDescription());
 
         final SimpleDateFormat dateFormat = new SimpleDateFormat("E, HH:mm");

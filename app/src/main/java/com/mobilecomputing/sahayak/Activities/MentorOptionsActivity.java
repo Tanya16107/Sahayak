@@ -1,6 +1,7 @@
 package com.mobilecomputing.sahayak.Activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -15,9 +16,13 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.mobilecomputing.sahayak.Fragments.proposalShowFragment;
 import com.mobilecomputing.sahayak.JavaClasses.CustomTimePickerDialog;
 import com.mobilecomputing.sahayak.JavaClasses.Proposal;
 import com.mobilecomputing.sahayak.JavaClasses.ProposalLab;
+import com.mobilecomputing.sahayak.JavaClasses.UserClass;
+import com.mobilecomputing.sahayak.JavaClasses.UserClassDBHelper;
 import com.mobilecomputing.sahayak.R;
 
 import java.util.ArrayList;
@@ -27,6 +32,8 @@ import java.util.List;
 
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MentorOptionsActivity extends AppCompatActivity {
 
@@ -45,13 +52,17 @@ public class MentorOptionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mentor_options);
 
+        UserClass u= UserClassDBHelper.get(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         final Spinner spinner = (Spinner) findViewById(R.id.MentorOptionCategory);
         List<String> categories = new ArrayList<String>();
         categories.add("Language");
         categories.add("Science");
-        categories.add("Information Technology");
+        categories.add("Technology");
         categories.add("Sports");
         categories.add("Health");
+        categories.add("Music");
+        categories.add("Art");
+        categories.add("Other");
 
         final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         spinner.setAdapter(dataAdapter);
@@ -187,7 +198,7 @@ public class MentorOptionsActivity extends AppCompatActivity {
                 Calendar startCalendar = Calendar.getInstance();
                 startCalendar.set(mYear, mMonth, mDayOfMonth, mHourOfDay, mMinute);
                 Calendar hourLaterCalendar = Calendar.getInstance();
-                hourLaterCalendar.add(Calendar.HOUR_OF_DAY, 1);
+                //hourLaterCalendar.add(Calendar.HOUR_OF_DAY, 1);
 
                 String category = spinner.getSelectedItem().toString();
                 String skill = skillsMentor.getText().toString();
@@ -200,14 +211,24 @@ public class MentorOptionsActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please fill all fields", Toast.LENGTH_LONG).show();
                 }
 //                else if(startCalendar.compareTo(hourLaterCalendar) < 0)
-//                {
+//
 //                    Toast.makeText(getApplicationContext(), "Start time must be at least one hour from now", Toast.LENGTH_LONG).show();
 //                }
                 else
                 {
                     Proposal proposal = new Proposal(category, skill, startDate, duration, durationCap);
+                    proposal.setRating(u.getRating());
                     proposalLab.AddProposal(proposal);
-                    Toast.makeText(getApplicationContext(), "Succesfully added", Toast.LENGTH_LONG).show();
+                    new SweetAlertDialog(view.getContext(), SweetAlertDialog.SUCCESS_TYPE)
+                            .setTitleText("Session added successfully!")
+                            .setConfirmText("Okay")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                    sweetAlertDialog.dismiss();
+                                }
+                            })
+                            .show();
                 }
             }
         });
