@@ -15,5 +15,8 @@
 app/google-services.json
 cloud.tar.gz
 sahayak.jks
+*.jks
+*.pem
+*keystore*
 dummykeystore.properties
 
